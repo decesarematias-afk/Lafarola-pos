@@ -1,0 +1,2 @@
+# Lafarola-pos
+Admin

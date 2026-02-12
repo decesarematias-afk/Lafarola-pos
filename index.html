@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>La Farola Express — Menú Digital</title>
+<meta name="theme-color" content="#D4AF37">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="description" content="La Farola Express — Tu súper clásico de Banfield. Menú digital, pedí desde tu mesa.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/pdfmake@0.2.10/build/pdfmake.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pdfmake@0.2.10/build/vfs_fonts.min.js"></script>
+<style>
+/*═══════════════════════════════════════════
+  LA FAROLA EXPRESS — PREMIUM LANDING 2026
+  Design: Dark Luxury Gastronómica
+  Typography: Outfit + DM Sans
+  Full Menu with Unsplash Photos
+═══════════════════════════════════════════*/
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#D4AF37;--gold-light:#F5D469;--gold-glow:rgba(212,175,55,.25);--gold-soft:rgba(212,175,55,.08);
+  --bg:#08080A;--surface:#111114;--card:#16161A;--card-hover:#1C1C21;
+  --border:#222228;--border-light:#2A2A32;
+  --white:#FAFAFA;--text:#E8E8EC;--text-sec:#8E8E9A;--text-mut:#5A5A66;
+  --red:#EF4444;--green:#22C55E;--blue:#3B82F6;--orange:#F59E0B;--purple:#8B5CF6;--pink:#EC4899;
+  --heading:'Outfit',sans-serif;--body:'DM Sans',sans-serif;
+  --ease:cubic-bezier(.4,0,.2,1);--ease-spring:cubic-bezier(.34,1.56,.64,1);
+  --r:14px;--r-lg:20px;--r-sm:10px;
+  --shadow-gold:0 4px 20px rgba(212,175,55,.15);
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--body);background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;min-height:100vh;-webkit-font-smoothing:antialiased}
+::selection{background:var(--gold);color:var(--bg)}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:#333;border-radius:3px}
+button{cursor:pointer;font-family:var(--body);border:none;outline:none;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+img{display:block;max-width:100%}
+
+/* ═══ ANIMATIONS ═══ */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+@keyframes glow{0%,100%{box-shadow:0 0 8px var(--gold-glow)}50%{box-shadow:0 0 24px rgba(212,175,55,.4)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes confettiDrop{0%{opacity:1;transform:translateY(0) rotate(0)}100%{opacity:0;transform:translateY(500px) rotate(720deg)}}
+@keyframes breathe{0%,100%{opacity:.4}50%{opacity:.8}}
+@keyframes scaleIn{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+
+/* ═══ HERO ═══ */
+.hero{position:relative;min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 24px 100px;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 20%,rgba(212,175,55,.06) 0%,transparent 70%),radial-gradient(ellipse 60% 80% at 80% 80%,rgba(212,175,55,.04) 0%,transparent 60%);pointer-events:none}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:200px;background:linear-gradient(to top,var(--bg),transparent);pointer-events:none}
+.hero-grain{position:absolute;inset:0;opacity:.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");pointer-events:none}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 20px;background:var(--gold-soft);border:1px solid rgba(212,175,55,.15);border-radius:50px;font-size:.78rem;font-weight:500;color:var(--gold);letter-spacing:.5px;margin-bottom:28px;animation:fadeUp .6s var(--ease) forwards;opacity:0}
+.hero-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+.hero-badge .dot.off{background:var(--red);animation:none}
+.hero-emoji{font-size:4.5rem;margin-bottom:16px;animation:fadeUp .6s var(--ease) .1s forwards,float 4s ease-in-out 1s infinite;opacity:0;filter:drop-shadow(0 4px 12px rgba(0,0,0,.3))}
+.hero-title{font-family:var(--heading);font-size:clamp(2.4rem,7vw,4rem);font-weight:800;letter-spacing:-.02em;line-height:1.1;margin-bottom:8px;animation:fadeUp .6s var(--ease) .15s forwards;opacity:0}
+.hero-title span{background:linear-gradient(135deg,var(--gold),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-tagline{font-family:var(--heading);font-size:clamp(1rem,3vw,1.3rem);font-weight:300;color:var(--text-sec);letter-spacing:.5px;margin-bottom:8px;animation:fadeUp .6s var(--ease) .2s forwards;opacity:0}
+.hero-addr{font-size:.82rem;color:var(--text-mut);margin-bottom:32px;animation:fadeUp .6s var(--ease) .25s forwards;opacity:0}
+.hero-mesa{display:inline-flex;align-items:center;gap:10px;padding:14px 28px;background:linear-gradient(135deg,var(--gold),#C5A028);color:var(--bg);border-radius:50px;font-family:var(--heading);font-size:1rem;font-weight:700;letter-spacing:.3px;box-shadow:var(--shadow-gold),0 0 0 1px rgba(212,175,55,.3);animation:fadeUp .6s var(--ease) .3s forwards;opacity:0}
+.hero-mesa .mesa-n{background:var(--bg);color:var(--gold);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.95rem}
+.hero-scroll{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--text-mut);font-size:.72rem;letter-spacing:1px;text-transform:uppercase;animation:fadeUp .6s var(--ease) .5s forwards,breathe 2.5s ease-in-out infinite;opacity:0;z-index:2;cursor:pointer}
+.hero-scroll-line{width:1px;height:28px;background:linear-gradient(to bottom,var(--gold),transparent)}
+
+/* ═══ HEADER ═══ */
+.hdr{position:sticky;top:0;z-index:100;padding:0 20px;height:60px;display:flex;align-items:center;justify-content:space-between;background:rgba(8,8,10,.85);backdrop-filter:blur(20px) saturate(1.4);-webkit-backdrop-filter:blur(20px) saturate(1.4);border-bottom:1px solid var(--border);transition:all .3s var(--ease);opacity:0;pointer-events:none}
+.hdr.scrolled{box-shadow:0 1px 20px rgba(0,0,0,.4);border-bottom-color:rgba(212,175,55,.1)}
+.hdr-left{display:flex;align-items:center;gap:10px}
+.hdr-logo{font-family:var(--heading);font-size:1rem;font-weight:700;color:var(--white)}.hdr-logo span{color:var(--gold)}
+.hdr-mesa{background:var(--gold-soft);border:1px solid rgba(212,175,55,.2);color:var(--gold);padding:4px 14px;border-radius:50px;font-size:.72rem;font-weight:600;font-family:var(--heading);letter-spacing:.5px}
+.hdr-right{display:flex;align-items:center;gap:12px}
+.hdr-status{display:flex;align-items:center;gap:5px;font-size:.72rem;color:var(--text-mut)}
+.hdr-status .dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+.hdr-status .dot.off{background:var(--red);animation:none}
+.hdr-cart-btn{position:relative;width:40px;height:40px;border-radius:50%;background:var(--card);border:1px solid var(--border);color:var(--text);display:flex;align-items:center;justify-content:center;font-size:1.1rem;transition:all .2s var(--ease)}
+.hdr-cart-btn:active{transform:scale(.92)}
+.hdr-cart-btn.has-items{background:var(--gold);color:var(--bg);border-color:var(--gold)}
+.hdr-cart-count{position:absolute;top:-4px;right:-4px;width:18px;height:18px;border-radius:50%;background:var(--red);color:var(--white);font-size:.65rem;font-weight:700;display:none;align-items:center;justify-content:center}
+.hdr-cart-count.vis{display:flex}
+
+/* ═══ SEARCH ═══ */
+.search-sec{padding:16px 20px 8px}
+.search-box{position:relative;width:100%}
+.search-box input{width:100%;padding:13px 16px 13px 44px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);color:var(--white);font-size:.9rem;font-family:var(--body);transition:all .25s var(--ease)}
+.search-box input::placeholder{color:var(--text-mut)}
+.search-box input:focus{border-color:var(--gold);outline:none;box-shadow:0 0 0 3px var(--gold-glow)}
+.search-box .search-ico{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:1.05rem;opacity:.4}
+
+/* ═══ CATEGORIES ═══ */
+.cats-wrap{position:relative}
+.cats-wrap::after{content:'';position:absolute;right:0;top:0;bottom:0;width:40px;background:linear-gradient(to right,transparent,var(--bg));pointer-events:none;z-index:2}
+.cats-wrap::before{content:'';position:absolute;left:0;top:0;bottom:0;width:20px;background:linear-gradient(to left,transparent,var(--bg));pointer-events:none;z-index:2;opacity:0;transition:opacity .3s}
+.cats-wrap.scrolled::before{opacity:1}
+.cats{padding:10px 20px 18px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;scroll-padding:0 20px;-ms-overflow-style:none}
+.cats::-webkit-scrollbar{display:none}
+.cat{flex-shrink:0;padding:8px 18px;border-radius:50px;background:var(--surface);color:var(--text-mut);font-size:.78rem;font-weight:600;font-family:var(--heading);letter-spacing:.3px;border:1px solid var(--border);transition:all .25s var(--ease);white-space:nowrap;scroll-snap-align:start;user-select:none;-webkit-user-select:none}
+.cat:active{transform:scale(.96)}
+.cat.active{background:var(--gold);color:var(--bg);border-color:var(--gold);box-shadow:var(--shadow-gold)}
+
+/* ═══ MENU ═══ */
+.menu-sec{padding:0 20px 120px}
+.menu-label{font-family:var(--heading);font-size:.72rem;font-weight:600;color:var(--text-mut);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px;padding-left:4px}
+.menu-count{color:var(--gold);margin-left:6px}
+.mgrid{display:grid;grid-template-columns:1fr;gap:12px}
+@media(min-width:540px){.mgrid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.mgrid{grid-template-columns:repeat(3,1fr)}}
+
+/* ═══ CARD ═══ */
+.mcard{background:var(--card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;transition:all .3s var(--ease);opacity:0;animation:fadeUp .5s var(--ease) forwards}
+.mcard:active{transform:scale(.985)}
+.mcard.off{opacity:.25;pointer-events:none;filter:grayscale(.6)}
+.mcard-body{display:flex;gap:14px;padding:14px}
+.mcard-img{width:82px;height:82px;border-radius:var(--r-sm);background:var(--surface);object-fit:cover;flex-shrink:0;border:1px solid var(--border)}
+.mcard-img-wrap{position:relative;width:82px;height:82px;flex-shrink:0;border-radius:var(--r-sm);overflow:hidden;background:var(--surface);border:1px solid var(--border)}
+.mcard-img-wrap img{width:100%;height:100%;object-fit:cover;display:block}
+.mcard-img-wrap .img-emoji{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:2.2rem;background:linear-gradient(135deg,var(--surface),var(--card));opacity:0;transition:opacity .2s}
+.mcard-img-wrap .img-emoji.vis{opacity:1}
+.mcard-info{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.mcard-cat{font-family:var(--heading);font-size:.6rem;color:var(--gold);font-weight:700;text-transform:uppercase;letter-spacing:1px}
+.mcard-name{font-family:var(--heading);font-size:.92rem;font-weight:700;color:var(--white);line-height:1.3}
+.mcard-desc{font-size:.76rem;color:var(--text-sec);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.4}
+.sizes{display:flex;gap:6px;padding:0 14px 14px}
+.sbtn{flex:1;padding:10px 4px;border-radius:var(--r-sm);background:var(--bg);border:1px solid var(--border);text-align:center;transition:all .2s var(--ease);cursor:pointer}
+.sbtn:hover{border-color:var(--border-light);background:var(--surface)}
+.sbtn:active{background:var(--gold);border-color:var(--gold);transform:scale(.95)}
+.sbtn:active .sl,.sbtn:active .sp{color:var(--bg)}
+.sl{font-family:var(--heading);font-size:.58rem;color:var(--text-mut);display:block;margin-bottom:3px;text-transform:uppercase;letter-spacing:.8px;font-weight:600}
+.sp{font-family:var(--heading);font-size:.88rem;font-weight:700;display:block;color:var(--gold)}
+/* Single price button */
+.sbtn.single{flex:1;max-width:180px}
+
+/* ═══ CART BAR ═══ */
+.cbar{position:fixed;bottom:0;left:0;right:0;z-index:200;padding:0 16px 16px;transform:translateY(120%);transition:transform .4s var(--ease-spring);pointer-events:none}
+.cbar.vis{transform:translateY(0);pointer-events:all}
+.cbar-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:linear-gradient(135deg,var(--gold),#C5A028);border-radius:var(--r);box-shadow:0 8px 40px rgba(0,0,0,.5),0 0 30px rgba(212,175,55,.2);cursor:pointer;transition:transform .15s var(--ease)}
+.cbar-inner:active{transform:scale(.98)}
+.cbar-left{display:flex;align-items:center;gap:10px}
+.cbar-count{width:28px;height:28px;border-radius:50%;background:var(--bg);color:var(--gold);display:flex;align-items:center;justify-content:center;font-family:var(--heading);font-weight:800;font-size:.82rem}
+.cbar-text{font-family:var(--heading);font-weight:700;font-size:.95rem;color:var(--bg)}
+.cbar-total{font-family:var(--heading);font-weight:800;font-size:1.15rem;color:var(--bg)}
+
+/* ═══ CART SHEET ═══ */
+.cs-ov{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:300;opacity:0;pointer-events:none;transition:opacity .3s var(--ease)}
+.cs-ov.open{opacity:1;pointer-events:all}
+.csheet{position:fixed;bottom:0;left:0;right:0;max-height:85vh;background:var(--card);z-index:301;border-radius:var(--r-lg) var(--r-lg) 0 0;transform:translateY(100%);transition:transform .4s var(--ease-spring);display:flex;flex-direction:column;overflow:hidden;border:1px solid var(--border);border-bottom:none}
+.csheet.open{transform:translateY(0)}
+.cs-handle{width:36px;height:4px;background:var(--border-light);border-radius:2px;margin:10px auto 6px}
+.cs-hdr{display:flex;align-items:center;justify-content:space-between;padding:6px 20px 16px;border-bottom:1px solid var(--border)}
+.cs-hdr h2{font-family:var(--heading);font-size:1.1rem;font-weight:700}
+.cs-clear{color:var(--red);font-size:.8rem;background:none;font-weight:600;font-family:var(--heading);opacity:.8}
+.cs-items{flex:1;overflow-y:auto;padding:16px 20px}
+.ci{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--border)}
+.ci:last-child{border:none}
+.ci-info{flex:1;min-width:0}
+.ci-name{font-family:var(--heading);font-size:.9rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ci-size{font-size:.7rem;color:var(--text-mut)}
+.ci-price{font-family:var(--heading);font-size:.9rem;font-weight:700;color:var(--gold);white-space:nowrap}
+.ci-qty{display:flex;align-items:center;gap:8px}
+.qbtn{width:32px;height:32px;border-radius:50%;background:var(--surface);color:var(--text);font-size:1rem;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);transition:all .15s var(--ease)}
+.qbtn:active{background:var(--gold);color:var(--bg);border-color:var(--gold);transform:scale(.9)}
+.qnum{font-family:var(--heading);font-weight:700;min-width:20px;text-align:center}
+.cs-foot{padding:16px 20px;border-top:1px solid var(--border)}
+.cs-total{display:flex;justify-content:space-between;margin-bottom:16px;font-family:var(--heading)}
+.cs-total span:first-child{font-size:1rem;font-weight:600}
+.cs-total span:last-child{font-size:1.2rem;font-weight:800;color:var(--gold)}
+.btn-ord{width:100%;padding:16px;border-radius:var(--r);background:linear-gradient(135deg,var(--gold),#C5A028);color:var(--bg);font-family:var(--heading);font-size:1rem;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;box-shadow:var(--shadow-gold);transition:all .2s var(--ease)}
+.btn-ord:active{transform:scale(.97)}
+.btn-ord:disabled{opacity:.35;pointer-events:none}
+
+/* ═══ SCREENS ═══ */
+.screen{position:fixed;inset:0;background:var(--bg);z-index:400;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;text-align:center;padding:60px 24px 40px;overflow-y:auto;transform:translateY(100%);transition:transform .5s var(--ease-spring)}
+.screen.on{transform:translateY(0)}
+.sc-emoji{font-size:4rem;margin-bottom:16px;animation:scaleIn .5s var(--ease-spring)}
+.sc-title{font-family:var(--heading);font-size:1.5rem;font-weight:800;margin-bottom:6px;color:var(--white)}
+.sc-sub{color:var(--text-sec);font-size:.9rem;margin-bottom:28px;max-width:340px;line-height:1.6}
+.sc-summary{width:100%;max-width:400px;background:var(--card);border-radius:var(--r);padding:18px;margin-bottom:24px;text-align:left;border:1px solid var(--border)}
+.sc-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem}.sc-row:last-child{border:none}
+.sc-total-row{display:flex;justify-content:space-between;padding:12px 0 0;font-family:var(--heading);font-size:1.15rem;font-weight:800;border-top:2px solid var(--gold);margin-top:8px}
+.sc-total-row span:last-child{color:var(--gold)}
+.btn-p{padding:15px 36px;border-radius:var(--r);background:linear-gradient(135deg,var(--gold),#C5A028);color:var(--bg);font-family:var(--heading);font-size:.95rem;font-weight:700;min-width:260px;box-shadow:var(--shadow-gold);transition:all .2s var(--ease)}
+.btn-p:active{transform:scale(.97)}
+.btn-s{padding:13px 28px;border-radius:var(--r);background:var(--card);color:var(--text);font-family:var(--heading);font-size:.9rem;font-weight:600;border:1px solid var(--border);min-width:260px;margin-top:10px;transition:all .2s var(--ease)}
+.btn-s:active{background:var(--card-hover)}
+.btn-g{padding:15px 36px;border-radius:var(--r);background:#4285F4;color:var(--white);font-family:var(--heading);font-size:.95rem;font-weight:700;min-width:260px;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .2s var(--ease)}
+.btn-g:active{transform:scale(.97);background:#3367D6}
+.btn-skip{color:var(--text-mut);font-size:.8rem;background:none;margin-top:16px;text-decoration:underline;text-underline-offset:3px}
+.wdots{display:flex;gap:8px;justify-content:center;margin:18px 0}
+.wdots span{width:8px;height:8px;border-radius:50%;background:var(--gold);animation:pulse 1.4s infinite}
+.wdots span:nth-child(2){animation-delay:.2s}.wdots span:nth-child(3){animation-delay:.4s}
+.ohist{width:100%;max-width:400px;margin-top:20px}
+.ohist h3{font-family:var(--heading);font-size:.75rem;color:var(--text-mut);margin-bottom:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px}
+.oh-item{background:var(--card);border-radius:var(--r-sm);padding:14px;margin-bottom:8px;border:1px solid var(--border)}
+.oh-badge{display:inline-block;padding:3px 10px;border-radius:50px;font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;font-family:var(--heading)}
+.oh-badge.pendiente{background:rgba(245,158,11,.12);color:var(--orange)}
+.oh-badge.confirmado{background:rgba(59,130,246,.12);color:var(--blue)}
+.oh-badge.preparando{background:rgba(139,92,246,.12);color:var(--purple)}
+.oh-badge.servido{background:rgba(34,197,94,.12);color:var(--green)}
+.oh-total{float:right;font-family:var(--heading);font-weight:700;color:var(--gold)}
+.confetti-c{position:fixed;inset:0;pointer-events:none;z-index:999;overflow:hidden}
+.confetti{position:absolute;width:10px;height:10px;top:-10px;animation:confettiDrop 3s ease-in-out forwards}
+.toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--card);color:var(--white);padding:14px 24px;border-radius:var(--r);font-size:.85rem;font-weight:600;font-family:var(--heading);z-index:500;opacity:0;transition:all .4s var(--ease-spring);border:1px solid var(--border);box-shadow:0 8px 40px rgba(0,0,0,.5);pointer-events:none;white-space:nowrap;max-width:90%}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+
+/* ═══ AI CHAT ═══ */
+.chat-fab{position:fixed;bottom:24px;left:20px;width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,#7C3AED,#5B21B6);color:var(--white);font-size:1.4rem;display:flex;align-items:center;justify-content:center;z-index:600;box-shadow:0 4px 24px rgba(124,58,237,.35);transition:all .3s var(--ease);cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.chat-fab:active{transform:scale(.9)}.chat-fab.has-cart{bottom:90px}
+.chat-fab-pulse{position:absolute;inset:-4px;border-radius:50%;border:2px solid rgba(124,58,237,.3);animation:glow 2.5s infinite;pointer-events:none}
+.chat-fab-label{position:absolute;left:62px;background:var(--card);color:var(--text);padding:8px 16px;border-radius:var(--r-sm);font-size:.78rem;font-weight:600;white-space:nowrap;box-shadow:0 4px 20px rgba(0,0,0,.4);border:1px solid var(--border);opacity:0;transform:translateX(-8px);transition:all .3s var(--ease);pointer-events:none}
+.chat-fab-label::before{content:'';position:absolute;left:-6px;top:50%;transform:translateY(-50%);border:6px solid transparent;border-right-color:var(--card)}
+.chat-fab:hover .chat-fab-label,.chat-fab-label.show{opacity:1;transform:translateX(0)}
+.chat-ov{position:fixed;inset:0;background:rgba(0,0,0,.5);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:700;opacity:0;pointer-events:none;transition:opacity .3s}
+.chat-ov.open{opacity:1;pointer-events:all}
+.chat-panel{position:fixed;bottom:0;left:0;right:0;height:75vh;max-height:600px;background:var(--card);z-index:701;border-radius:var(--r-lg) var(--r-lg) 0 0;transform:translateY(100%);transition:transform .4s var(--ease-spring);display:flex;flex-direction:column;overflow:hidden;border:1px solid var(--border);border-bottom:none}
+.chat-panel.open{transform:translateY(0)}
+@media(min-width:600px){.chat-panel{left:16px;right:auto;bottom:90px;width:380px;height:520px;border-radius:var(--r-lg);box-shadow:0 8px 40px rgba(0,0,0,.5);border:1px solid var(--border);z-index:701}}
+.chat-hdr{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--border);flex-shrink:0;background:var(--surface)}
+.chat-hdr-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#7C3AED,#5B21B6);display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+.chat-hdr-info{flex:1}
+.chat-hdr-name{font-family:var(--heading);font-size:.9rem;font-weight:700}
+.chat-hdr-status{font-size:.68rem;color:var(--green)}
+.chat-close{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.08);color:var(--white);display:flex;align-items:center;justify-content:center;font-size:1.2rem;cursor:pointer;z-index:10;transition:all .15s var(--ease)}
+.chat-close:hover{background:rgba(255,255,255,.15)}.chat-close:active{background:var(--red);transform:scale(.9)}
+.chat-msgs{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px}
+.chat-msg{max-width:85%;padding:12px 16px;border-radius:var(--r);font-size:.85rem;line-height:1.6;animation:fadeUp .3s var(--ease)}
+.chat-msg-row{display:flex;gap:8px;align-items:flex-start;align-self:flex-start;max-width:90%}
+.chat-bot-avatar{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#7C3AED,#5B21B6);display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0;margin-top:2px}
+.chat-msg.bot{background:var(--surface);border:1px solid var(--border);align-self:flex-start;border-bottom-left-radius:4px}
+.chat-msg.user{background:linear-gradient(135deg,#7C3AED,#5B21B6);align-self:flex-end;border-bottom-right-radius:4px}
+/* Ingredient Customization Modal */
+.ing-modal-ov{position:fixed;inset:0;background:rgba(0,0,0,.65);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:900;opacity:0;pointer-events:none;transition:opacity .3s;display:flex;align-items:flex-end;justify-content:center}
+.ing-modal-ov.open{opacity:1;pointer-events:all}
+.ing-modal{background:var(--card);border-radius:var(--r-lg) var(--r-lg) 0 0;width:100%;max-width:420px;max-height:75vh;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .35s var(--ease-spring);border:1px solid var(--border);border-bottom:none;overflow:hidden}
+@media(min-width:600px){.ing-modal{border-radius:var(--r-lg);margin-bottom:60px;border:1px solid var(--border)}}
+.ing-modal-ov.open .ing-modal{transform:translateY(0)}
+.ing-modal-hdr{display:flex;align-items:center;gap:12px;padding:16px 18px;border-bottom:1px solid var(--border);background:var(--surface)}
+.ing-modal-hdr img{width:56px;height:56px;border-radius:10px;object-fit:cover}
+.ing-modal-hdr-info{flex:1}
+.ing-modal-hdr-name{font-family:var(--heading);font-weight:700;font-size:.95rem}
+.ing-modal-hdr-meta{font-size:.72rem;color:var(--text-sec);margin-top:2px}
+.ing-modal-body{flex:1;overflow-y:auto;padding:14px 18px}
+.ing-section{margin-bottom:14px}
+.ing-section-title{font-family:var(--heading);font-size:.75rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px}
+.ing-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.ing-item:last-child{border-bottom:none}
+.ing-check{width:22px;height:22px;border-radius:6px;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;flex-shrink:0;font-size:.75rem}
+.ing-check.active{background:var(--gold);border-color:var(--gold);color:var(--bg)}
+.ing-label{flex:1;font-size:.82rem}
+.ing-price{font-family:var(--heading);font-size:.75rem;color:var(--gold);font-weight:600}
+.ing-footer{display:flex;gap:10px;padding:14px 18px;border-top:1px solid var(--border);background:var(--surface)}
+.ing-footer button{flex:1;padding:12px;border-radius:50px;font-family:var(--heading);font-weight:700;font-size:.85rem;cursor:pointer;transition:all .2s}
+.ing-btn-cancel{background:var(--surface);color:var(--text-sec);border:1px solid var(--border)}
+.ing-btn-cancel:hover{background:rgba(255,255,255,.08)}
+.ing-btn-add{background:var(--gold);color:var(--bg);border:none}
+.ing-btn-add:hover{filter:brightness(1.1)}
+.ing-info-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.ing-info-pill{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:50px;background:rgba(255,255,255,.06);font-size:.7rem;color:var(--text-sec);border:1px solid var(--border)}
+.ing-info-pill b{color:var(--text);font-weight:600}
+.chat-msg .add-btn{display:inline-block;margin-top:8px;padding:6px 14px;border-radius:50px;background:var(--gold);color:var(--bg);font-size:.72rem;font-weight:700;font-family:var(--heading);cursor:pointer;border:none;letter-spacing:.3px}
+.chat-product-card{display:flex;gap:10px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:12px;padding:10px;margin:6px 0;transition:transform .2s var(--ease),box-shadow .2s}
+.chat-product-card:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.2)}
+.chat-product-card img{width:72px;height:72px;border-radius:10px;object-fit:cover;flex-shrink:0}
+.chat-product-card .cpc-info{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.chat-product-card .cpc-name{font-family:var(--heading);font-weight:700;font-size:.82rem;color:var(--text);line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chat-product-card .cpc-desc{font-size:.7rem;color:var(--text-sec);line-height:1.3;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.chat-product-card .cpc-prices{display:flex;flex-wrap:wrap;gap:4px;margin-top:auto}
+.chat-product-card .cpc-add{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:50px;background:var(--gold);color:var(--bg);font-size:.68rem;font-weight:700;font-family:var(--heading);cursor:pointer;border:none;letter-spacing:.3px;transition:all .2s;white-space:nowrap}
+.chat-product-card .cpc-add:hover{filter:brightness(1.15);transform:scale(1.04)}
+.chat-product-card .cpc-add .cpc-sz{opacity:.8;font-weight:500}
+.chat-typing{align-self:flex-start;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:12px 18px;display:flex;gap:5px}
+.chat-typing span{width:6px;height:6px;border-radius:50%;background:var(--text-mut);animation:pulse 1.2s infinite}
+.chat-typing span:nth-child(2){animation-delay:.2s}.chat-typing span:nth-child(3){animation-delay:.4s}
+.chat-input-wrap{display:flex;gap:8px;padding:12px 14px;border-top:1px solid var(--border);background:var(--surface);flex-shrink:0}
+.chat-input{flex:1;padding:10px 16px;border-radius:50px;background:var(--bg);border:1px solid var(--border);color:var(--white);font-size:.88rem;font-family:var(--body);resize:none;max-height:80px}
+.chat-input:focus{border-color:#7C3AED;outline:none}
+.chat-send{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#7C3AED,#5B21B6);color:var(--white);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.chat-send:active{transform:scale(.9)}.chat-send:disabled{opacity:.35;pointer-events:none}
+.chat-chips{display:flex;flex-wrap:wrap;gap:6px;padding:8px 14px 4px;border-top:1px solid var(--border)}
+.chat-chip{padding:6px 14px;border-radius:50px;background:var(--bg);border:1px solid var(--border);color:var(--text-sec);font-size:.72rem;font-family:var(--heading);font-weight:500;white-space:nowrap}
+.chat-chip:active{background:rgba(124,58,237,.15);border-color:#7C3AED;color:var(--white)}
+
+/* ═══ RATING ═══ */
+.rating-stars{display:flex;gap:8px;justify-content:center;margin:12px 0 20px}
+.rating-stars button{font-size:2rem;background:none;opacity:.3;transition:all .2s var(--ease)}
+.rating-stars button.active{opacity:1;transform:scale(1.15)}
+
+.powered{text-align:center;padding:20px 20px 40px;color:var(--text-mut);font-size:.7rem;letter-spacing:.5px}
+.powered span{color:var(--gold);font-weight:600}
+
+@media(min-width:768px){.mgrid{grid-template-columns:repeat(2,1fr);gap:16px}.menu-sec{padding:0 40px 120px}.search-sec{padding:16px 40px 8px}.cats{padding:10px 40px 18px}}
+@media(min-width:1024px){.mgrid{grid-template-columns:repeat(3,1fr)}}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero" id="heroSec">
+  <div class="hero-grain"></div>
+  <div class="hero-badge"><div class="dot" id="heroDot"></div><span id="heroStatusText">Abierto ahora</span></div>
+  <div class="hero-emoji">🍽️</div>
+  <h1 class="hero-title">La <span>Farola</span> Express</h1>
+  <p class="hero-tagline">#TuSúperClásico de Banfield</p>
+  <p class="hero-addr">📍 Alberto Larroque 107, Banfield</p>
+  <div class="hero-mesa">🪑 Tu Mesa <div class="mesa-n" id="mesaNumHero">-</div></div>
+  <div class="hero-scroll" onclick="document.getElementById('menuAnchor').scrollIntoView({behavior:'smooth'})"><span>Ver menú</span><div class="hero-scroll-line"></div></div>
+</section>
+
+<!-- HEADER -->
+<header class="hdr" id="mainHdr">
+  <div class="hdr-left"><div class="hdr-logo">🍽️ <span>La Farola</span></div><div class="hdr-mesa">Mesa <span id="mesaNum">-</span></div></div>
+  <div class="hdr-right"><div class="hdr-status"><div class="dot" id="dot"></div><span id="stxt">Conectado</span></div><button class="hdr-cart-btn" id="hdrCartBtn" onclick="openCart()">🛒<div class="hdr-cart-count" id="hdrCartCount">0</div></button></div>
+</header>
+
+<div id="menuAnchor"></div>
+<div class="search-sec"><div class="search-box"><input id="searchIn" placeholder="¿Qué tenés ganas de comer?" oninput="renderMenu()"><span class="search-ico">🔍</span></div></div>
+<div class="cats-wrap" id="catsWrap"><div class="cats" id="cats"></div></div>
+
+<section class="menu-sec">
+  <div class="menu-label" id="menuLabel">Todo el menú <span class="menu-count" id="menuCount"></span></div>
+  <div class="mgrid" id="mgrid"></div>
+</section>
+
+<!-- CART BAR -->
+<div class="cbar" id="cbar"><div class="cbar-inner" onclick="openCart()"><div class="cbar-left"><div class="cbar-count" id="cbarN">0</div><div class="cbar-text">Ver mi pedido</div></div><div class="cbar-total" id="cbarT">$0</div></div></div>
+
+<!-- CART SHEET -->
+<div class="cs-ov" id="csOv" onclick="closeCart()"></div>
+<div class="csheet" id="csheet">
+  <div class="cs-handle"></div>
+  <div class="cs-hdr"><h2>🛒 Mi Pedido</h2><button class="cs-clear" onclick="clearCart()">Vaciar</button></div>
+  <div class="cs-items" id="csItems"></div>
+  <div class="cs-foot"><div class="cs-total"><span>Total</span><span id="csTotal">$0</span></div><button class="btn-ord" id="btnOrd" onclick="sendOrder()">🔔 ORDENAR</button></div>
+</div>
+
+<!-- SCREENS -->
+<div class="screen" id="scSent">
+  <div class="sc-emoji">✅</div><div class="sc-title">¡Pedido Enviado!</div><div class="sc-sub">Tu pedido fue enviado a cocina. Te avisamos cuando esté listo.</div>
+  <div class="sc-summary" id="sentSum"></div><div class="wdots"><span></span><span></span><span></span></div>
+  <div id="statusTxt" style="color:var(--gold);font-family:var(--heading);font-weight:700;margin-bottom:18px">Esperando confirmación...</div>
+  <button class="btn-p" onclick="backToMenu()">➕ Pedir algo más</button><button class="btn-s" onclick="requestBill()">💳 PEDIR LA CUENTA</button>
+  <div class="ohist" id="ohist"></div>
+</div>
+<div class="screen" id="scWait">
+  <div class="sc-emoji">💳</div><div class="sc-title">Cuenta Solicitada</div><div class="sc-sub">El mozo se acerca para cobrarte.</div>
+  <div class="sc-summary" id="billSum"></div><div class="wdots"><span></span><span></span><span></span></div>
+</div>
+<div class="screen" id="scDone">
+  <div class="sc-emoji">🎉</div><div class="sc-title">¡Gracias por tu visita!</div><div class="sc-sub">Tu pago fue confirmado.</div>
+  <div class="sc-summary" id="rcptSum"></div>
+  <button class="btn-p" onclick="downloadReceipt()" style="margin-bottom:12px">📄 Descargar Comprobante</button>
+  <div style="margin-top:24px;padding-top:24px;border-top:1px solid var(--border);width:100%;max-width:400px;text-align:center">
+    <div style="font-size:2.5rem;margin-bottom:8px">⭐</div>
+    <div style="font-family:var(--heading);font-size:1.05rem;font-weight:700;margin-bottom:4px">¿Te gustó tu experiencia?</div>
+    <div style="color:var(--text-sec);font-size:.82rem;margin-bottom:14px">Tu opinión nos ayuda a mejorar</div>
+    <div class="rating-stars" id="ratingStars"><button onclick="setRating(1)">⭐</button><button onclick="setRating(2)">⭐</button><button onclick="setRating(3)">⭐</button><button onclick="setRating(4)">⭐</button><button onclick="setRating(5)">⭐</button></div>
+    <button class="btn-g" onclick="goReviews()">⭐ Dejanos tu reseña en Google</button>
+    <button class="btn-skip" onclick="resetAll()">Volver al menú</button>
+  </div>
+</div>
+
+<!-- AI CHAT -->
+<button class="chat-fab" id="chatFab" onclick="toggleChat()"><div class="chat-fab-pulse"></div>🤖<div class="chat-fab-label" id="chatLabel">¿Necesitás ayuda?</div></button>
+<div class="chat-ov" id="chatOv" onclick="closeChat()"></div>
+<div class="chat-panel" id="chatPanel">
+  <div class="chat-hdr"><div class="chat-hdr-avatar">🍽️</div><div class="chat-hdr-info"><div class="chat-hdr-name">Asistente La Farola</div><div class="chat-hdr-status" id="chatStatus">En línea</div></div><button class="chat-close" id="chatCloseBtn" onclick="closeChat()">✕</button></div>
+  <div class="chat-msgs" id="chatMsgs"></div>
+  <div class="chat-chips" id="chatChips"><button class="chat-chip" onclick="chatSend('¿Cuál es el plato del día?')">🍽️ Plato del día</button><button class="chat-chip" onclick="chatSend('¿Qué me recomendás?')">⭐ Recomendame</button><button class="chat-chip" onclick="chatSend('¿Cuáles son las promos?')">🔥 Promos</button><button class="chat-chip" onclick="chatSend('¿Tienen opciones sin TACC?')">🌾 Sin TACC</button></div>
+  <div class="chat-input-wrap"><textarea class="chat-input" id="chatInput" placeholder="Escribí tu consulta..." rows="1" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();chatSendInput()}"></textarea><button class="chat-send" id="chatSendBtn" onclick="chatSendInput()">➤</button></div>
+</div>
+
+<div class="confetti-c" id="confC"></div>
+<div class="toast" id="toast"></div>
+<div class="powered">Powered by <span>Rise IA</span> · Menu Digital 2026</div>
+
+<script>
+// ═══════════════════════════════════════════
+// LA FAROLA EXPRESS — FULL MENU ENGINE
+// ═══════════════════════════════════════════
+
+const SUPA_URL='TU_SUPABASE_URL',SUPA_KEY='TU_SUPABASE_ANON_KEY';
+const DEMO=!SUPA_URL.startsWith('http');
+const PLACE_ID='TU_GOOGLE_PLACE_ID';
+const REVIEW_URL=`https://search.google.com/local/writereview?placeid=${PLACE_ID}`;
+const BIZ={name:'La Farola Express',addr:'Alberto Larroque 107, Banfield',cuit:'XX-XXXXXXXX-X',tag:'#TuSúperClásico'};
+
+// ═══ FOOD PHOTOS (loremflickr + placehold fallback) ═══
+// Using loremflickr for category-based food images
+const IMG = {
+  // Picoteo
+  picada: 'https://loremflickr.com/200/200/charcuterie,appetizer',
+  papas_cheddar: 'https://loremflickr.com/200/200/loaded,fries',
+  mozzarella_sticks: 'https://loremflickr.com/200/200/mozzarella,sticks',
+  tabla: 'https://loremflickr.com/200/200/antipasto,platter',
+  // Milanesas
+  milanesa: 'https://loremflickr.com/200/200/schnitzel,breaded',
+  milanesa_napo: 'https://loremflickr.com/200/200/chicken,parmesan',
+  schnitzel: 'https://loremflickr.com/200/200/wiener,schnitzel',
+  // Pizzas
+  pizza_muzza: 'https://loremflickr.com/200/200/cheese,pizza',
+  pizza_napo: 'https://loremflickr.com/200/200/margherita,pizza',
+  pizza_special: 'https://loremflickr.com/200/200/gourmet,pizza',
+  pizza_fugazza: 'https://loremflickr.com/200/200/focaccia,onion',
+  calzone: 'https://loremflickr.com/200/200/calzone,italian',
+  faina: 'https://loremflickr.com/200/200/farinata,chickpea',
+  // Pastas
+  carbonara: 'https://loremflickr.com/200/200/carbonara,pasta',
+  ravioles: 'https://loremflickr.com/200/200/ravioli,pasta',
+  noquis: 'https://loremflickr.com/200/200/gnocchi,potato',
+  sorrentinos: 'https://loremflickr.com/200/200/stuffed,pasta',
+  canelones: 'https://loremflickr.com/200/200/cannelloni,baked',
+  tagliatelle: 'https://loremflickr.com/200/200/tagliatelle,fresh',
+  bolognesa: 'https://loremflickr.com/200/200/bolognese,spaghetti',
+  // Sandwiches / Burgers
+  burger: 'https://loremflickr.com/200/200/burger,hamburger',
+  burger_bacon: 'https://loremflickr.com/200/200/bacon,cheeseburger',
+  lomito: 'https://loremflickr.com/200/200/steak,sandwich',
+  sandwich: 'https://loremflickr.com/200/200/sandwich,toasted',
+  // Ensaladas
+  cesar: 'https://loremflickr.com/200/200/caesar,salad',
+  caprese: 'https://loremflickr.com/200/200/caprese,tomato',
+  ensalada: 'https://loremflickr.com/200/200/fresh,salad',
+  // Carnes
+  asado: 'https://loremflickr.com/200/200/grilled,ribs',
+  lomo: 'https://loremflickr.com/200/200/tenderloin,steak',
+  bife: 'https://loremflickr.com/200/200/ribeye,steak',
+  matambre: 'https://loremflickr.com/200/200/flank,steak',
+  // Pollo
+  pollo: 'https://loremflickr.com/200/200/roasted,chicken',
+  pollo_wok: 'https://loremflickr.com/200/200/chicken,stirfry',
+  arroz_pollo: 'https://loremflickr.com/200/200/chicken,rice',
+  // Cerdo
+  costillas: 'https://loremflickr.com/200/200/pork,ribs',
+  matambrito: 'https://loremflickr.com/200/200/pork,grilled',
+  // Pescados
+  rabas: 'https://loremflickr.com/200/200/calamari,fried',
+  salmon: 'https://loremflickr.com/200/200/salmon,grilled',
+  merluza: 'https://loremflickr.com/200/200/fish,fillet',
+  // Vegetariano
+  wok_veg: 'https://loremflickr.com/200/200/vegetable,stirfry',
+  omelette: 'https://loremflickr.com/200/200/omelette,eggs',
+  // Brunch/Café
+  brunch: 'https://loremflickr.com/200/200/brunch,breakfast',
+  tostado: 'https://loremflickr.com/200/200/grilled,cheese',
+  cafe: 'https://loremflickr.com/200/200/espresso,coffee',
+  cappuccino: 'https://loremflickr.com/200/200/cappuccino,latte',
+  submarino: 'https://loremflickr.com/200/200/hot,chocolate',
+  medialunas: 'https://loremflickr.com/200/200/croissant,pastry',
+  croque: 'https://loremflickr.com/200/200/croque,monsieur',
+  // Postres
+  flan: 'https://loremflickr.com/200/200/flan,caramel',
+  brownie: 'https://loremflickr.com/200/200/brownie,chocolate',
+  helado: 'https://loremflickr.com/200/200/icecream,gelato',
+  cheesecake: 'https://loremflickr.com/200/200/cheesecake,dessert',
+  tiramisu: 'https://loremflickr.com/200/200/tiramisu,italian',
+  torta: 'https://loremflickr.com/200/200/cake,slice',
+  alfajor: 'https://loremflickr.com/200/200/dulce,leche',
+  frutas: 'https://loremflickr.com/200/200/fruit,salad',
+  budin: 'https://loremflickr.com/200/200/bread,pudding',
+  // Bebidas
+  gaseosa: 'https://loremflickr.com/200/200/soda,cola',
+  cerveza: 'https://loremflickr.com/200/200/beer,draft',
+  vino: 'https://loremflickr.com/200/200/red,wine',
+  agua: 'https://loremflickr.com/200/200/sparkling,water',
+  jugo: 'https://loremflickr.com/200/200/orange,juice',
+  fernet: 'https://loremflickr.com/200/200/cocktail,dark',
+  infantil: 'https://loremflickr.com/200/200/kids,meal',
+};
+
+// Category emoji fallbacks
+const CAT_EMOJI = {
+  Picoteo:'🍢',Milanesas:'🍗',Pizzanesa:'🔥',Pizzas:'🍕',Sandwiches:'🍔',
+  Ensaladas:'🥗',Pastas:'🍝',Pollo:'🐔',Carnes:'🥩',Cerdo:'🐷',
+  Pescados:'🐟',Vegetariano:'🥬',Celíacos:'🌾',Infantil:'👶',Brunch:'☕',
+  Tostados:'🥪',Cafetería:'☕',Patisserie:'🎂',Postres:'🍮',Bebidas:'🥤'
+};
+
+// ═══ NUTRITION DATA (ingredients + calories) ═══
+const NUTRI={
+// Picoteo
+"pic-sex":{ing:"Jamón cocido, queso, salame, jamón crudo, fainá, aceitunas",cal:680},
+"pic-pod":{ing:"Milanesitas de ternera, pollo y merluza, aros de cebolla, rabas, bastones de muzza, aceitunas, papas fritas",cal:1450},
+"pic-pap":{ing:"Papas fritas, salsa cheddar, panceta crocante, cebolla de verdeo",cal:720},
+"pic-bast":{ing:"Muzzarella rebozada, salsa fileto, albahaca fresca, dips BBQ y cheddar",cal:540},
+// Milanesas
+"mil-sim":{ing:"Milanesa de ternera rebozada, papas fritas",cal:850},
+"mil-com":{ing:"Milanesa de ternera, lechuga, tomate, huevo frito, papas fritas",cal:980},
+"mil-nap":{ing:"Milanesa de ternera, salsa de tomate, jamón, queso gratinado",cal:1050},
+"mil-bbq":{ing:"Milanesa de ternera, salsa BBQ ahumada, cheddar fundido, cebolla crispy",cal:1100},
+"mil-che":{ing:"Milanesa de ternera, doble cheddar fundido, panceta crocante",cal:1150},
+"mil-sui":{ing:"Milanesa de ternera, crema, champiñones salteados, queso gratinado",cal:1020},
+"mil-rio":{ing:"Milanesa de ternera, pimiento asado, cebolla, salsa criolla",cal:920},
+"mil-fio":{ing:"Milanesa de ternera, espinaca, bechamel, queso gratinado",cal:980},
+"mil-med":{ing:"Milanesa de ternera, palta fresca, tomate, salsa especial",cal:950},
+"mil-cru":{ing:"Milanesa de ternera, jamón crudo, rúcula, parmesano",cal:1000},
+"mil-far":{ing:"Milanesa de ternera, receta secreta de la casa, papas fritas",cal:1080},
+"mil-fug":{ing:"Milanesa de ternera, cebolla caramelizada, queso derretido",cal:960},
+"mil-4q":{ing:"Milanesa de ternera, muzzarella, cheddar, roquefort, parmesano",cal:1120},
+// Pizzanesas
+"pzn-muz":{ing:"Milanesa de ternera, masa de pizza, muzzarella, salsa de tomate",cal:1350},
+"pzn-nap":{ing:"Milanesa de ternera, pizza napolitana, tomate, ajo, queso",cal:1400},
+"pzn-jm":{ing:"Milanesa de ternera, pizza, jamón cocido, morrón asado",cal:1420},
+"pzn-fug":{ing:"Milanesa de ternera, pizza fugazza, cebolla, queso",cal:1380},
+"pzn-ame":{ing:"Milanesa de ternera, pizza americana, jamón, morrón, aceitunas",cal:1410},
+// Pizzas
+"piz-muz":{ing:"Masa, salsa de tomate, muzzarella, aceitunas verdes",cal:280},
+"piz-ver":{ing:"Masa, vegetales frescos de estación, aceite de oliva",cal:240},
+"piz-fuq":{ing:"Masa, cebolla caramelizada, queso derretido",cal:310},
+"piz-nap":{ing:"Masa, tomate fresco, ajo, albahaca, aceite de oliva",cal:260},
+"piz-jam":{ing:"Masa, jamón cocido, muzzarella, salsa de tomate",cal:300},
+"piz-jmo":{ing:"Masa, jamón, morrones asados, aceitunas, muzzarella",cal:320},
+"piz-npe":{ing:"Masa, tomate, ingredientes premium, muzzarella",cal:310},
+"piz-cr":{ing:"Masa, jamón crudo, rúcula fresca, parmesano, muzzarella",cal:340},
+"piz-fgz":{ing:"Masa rellena, cebolla, queso abundante",cal:380},
+"piz-fge":{ing:"Masa rellena, cebolla, queso, jamón cocido",cal:410},
+"piz-cal":{ing:"Masa cerrada, jamón cocido, muzzarella, salsa",cal:360},
+"piz-cala":{ing:"Masa, longaniza calabresa, muzzarella",cal:330},
+"piz-roq":{ing:"Masa, queso roquefort, nueces, muzzarella",cal:350},
+"piz-far":{ing:"Masa, receta especial de la casa, muzzarella premium",cal:340},
+"piz-fai":{ing:"Harina de garbanzos, aceite de oliva, sal, pimienta",cal:180},
+// Sandwiches
+"sw-cla":{ing:"Pan, lechuga, tomate, aderezos, proteína a elección",cal:620},
+"sw-full":{ing:"Pan, lechuga, tomate, huevo, jamón, queso, aderezos",cal:780},
+"sw-bbq":{ing:"Pan, carne, salsa BBQ, cheddar, cebolla crispy, panceta",cal:850},
+"sw-ched":{ing:"Pan, carne, doble cheddar, panceta, aderezos",cal:880},
+// Ensaladas
+"ens-mix":{ing:"Mix de hojas verdes, tomate, zanahoria, huevo",cal:220},
+"ens-zah":{ing:"Zanahoria rallada, remolacha, huevo, aceite de oliva",cal:200},
+"ens-ruc":{ing:"Rúcula, tomate cherry, parmesano, aceto balsámico",cal:190},
+"ens-ser":{ing:"Mix verde, palmitos, champiñones, palta, tomate",cal:240},
+"ens-comp":{ing:"Lechuga, tomate, zanahoria, huevo, choclo, remolacha",cal:250},
+"ens-exp":{ing:"Mix premium, salmón, palta, semillas, aderezo especial",cal:380},
+"ens-cap":{ing:"Tomate, muzzarella fresca, albahaca, aceite de oliva",cal:280},
+"ens-far":{ing:"Mix especial de la casa, ingredientes premium",cal:300},
+"ens-cae":{ing:"Lechuga romana, pollo grillado, parmesano, croutons, aderezo césar",cal:420},
+"ens-esp":{ing:"Mix gourmet, ingredientes de estación, aderezo especial",cal:310},
+// Pastas
+"pas-tag":{ing:"Tagliatelle al huevo, salsa a elección",cal:580},
+"pas-noq":{ing:"Ñoquis de papa caseros, salsa a elección",cal:520},
+"pas-rav":{ing:"Ravioles rellenos de ricota y nuez, salsa",cal:560},
+"pas-sor":{ing:"Sorrentinos rellenos de jamón y queso, salsa",cal:580},
+"pas-can":{ing:"Canelones rellenos de verdura o carne, bechamel, queso gratinado",cal:620},
+"pas-car":{ing:"Pasta fresca, panceta crocante, yema de huevo, parmesano, pimienta",cal:650},
+"pas-bol":{ing:"Pasta fresca, salsa bolognesa de carne, parmesano",cal:620},
+"pas-4q":{ing:"Pasta fresca, muzzarella, cheddar, roquefort, parmesano, crema",cal:700},
+"pas-est":{ing:"Pasta del día, salsa especial del chef",cal:600},
+// Pollo
+"pol-gri":{ing:"Suprema de pollo grillada, guarnición a elección",cal:450},
+"pol-par":{ing:"Suprema rebozada, salsa de tomate, jamón, queso gratinado",cal:680},
+"pol-val":{ing:"Arroz, pollo, pimiento, arvejas, azafrán",cal:580},
+"pol-wok":{ing:"Pollo salteado, verduras de estación, salsa soja, jengibre",cal:420},
+"pol-arr":{ing:"Arroz blanco, pollo grillado, verduras",cal:480},
+// Carnes
+"car-lom":{ing:"Lomo de ternera, guarnición a elección",cal:520},
+"car-bif":{ing:"Bife de chorizo, guarnición a elección",cal:580},
+"car-mat":{ing:"Matambre a la pizza, salsa, jamón, queso, morrón",cal:720},
+"car-vac":{ing:"Vacío tierno, chimichurri, guarnición",cal:550},
+"car-ent":{ing:"Entraña a la parrilla, chimichurri, guarnición",cal:540},
+// Cerdo
+"cer-bon":{ing:"Bondiola de cerdo braseada, salsa especial, guarnición",cal:620},
+"cer-cos":{ing:"Costillas de cerdo, salsa BBQ, guarnición",cal:700},
+"cer-mat":{ing:"Matambrito de cerdo a la parrilla, limón, guarnición",cal:560},
+// Pescados
+"pes-rab":{ing:"Rabas de calamar rebozadas, limón, salsa tártara",cal:480},
+"pes-sal":{ing:"Filet de salmón rosado grillado, guarnición",cal:420},
+"pes-mer":{ing:"Filet de merluza a la romana, limón, guarnición",cal:380},
+// Vegetariano
+"veg-wok":{ing:"Verduras de estación salteadas, salsa soja, arroz",cal:320},
+"veg-ome":{ing:"Huevos, queso, verduras de estación",cal:350},
+// Brunch
+"bru-cla":{ing:"Café o té, medialunas, tostadas, mermelada, manteca, jugo",cal:480},
+"bru-far":{ing:"Café, medialunas, huevos, panceta, jugo, yogur, frutas",cal:720},
+// Tostados
+"tos-jq":{ing:"Pan de molde, jamón cocido, queso derretido",cal:320},
+"tos-jqt":{ing:"Pan de molde, jamón, queso, tomate",cal:340},
+// Cafetería
+"caf-cor":{ing:"Café espresso, leche espumada",cal:80},
+"caf-cap":{ing:"Café espresso, leche espumada, cacao",cal:120},
+"caf-sub":{ing:"Leche caliente, barra de chocolate",cal:280},
+"caf-med":{ing:"Medialunas de manteca artesanales",cal:220},
+// Postres
+"pos-fla":{ing:"Flan casero de huevo, dulce de leche, crema batida",cal:320},
+"pos-bro":{ing:"Brownie de chocolate, helado de vainilla, salsa de chocolate",cal:480},
+"pos-che":{ing:"Base de galleta, crema de queso, dulce de leche",cal:420},
+"pos-hel":{ing:"Helado artesanal, 3 bochas a elección",cal:340},
+"pat-ti":{ing:"Bizcocho, café espresso, mascarpone, cacao",cal:380},
+"pat-bt":{ing:"Brownie, dulce de leche, crema, chocolate",cal:520},
+// Bebidas
+"beb-gas":{ing:"Coca-Cola, Sprite, Fanta o similar",cal:140},
+"beb-cer":{ing:"Cerveza artesanal tirada",cal:180},
+"beb-vin":{ing:"Vino tinto, blanco o rosado",cal:160},
+"beb-agu":{ing:"Agua mineral con o sin gas",cal:0},
+"beb-jug":{ing:"Jugo de naranja exprimido",cal:110},
+"beb-fer":{ing:"Fernet Branca, Coca-Cola, hielo",cal:220},
+};
+// Default nutrition for items without specific data
+const NUTRI_DEFAULT={
+  Picoteo:{ing:"Variedad de ingredientes para compartir",cal:600},
+  Milanesas:{ing:"Milanesa de ternera rebozada, guarnición",cal:900},
+  Pizzanesa:{ing:"Milanesa + pizza combinada",cal:1400},
+  Pizzas:{ing:"Masa, salsa de tomate, muzzarella",cal:300},
+  Sandwiches:{ing:"Pan, proteína, vegetales, aderezos",cal:700},
+  Ensaladas:{ing:"Mix de hojas, vegetales frescos",cal:250},
+  Pastas:{ing:"Pasta fresca, salsa a elección",cal:580},
+  Pollo:{ing:"Pollo, guarnición a elección",cal:480},
+  Carnes:{ing:"Carne vacuna, guarnición a elección",cal:550},
+  Cerdo:{ing:"Cerdo, guarnición a elección",cal:600},
+  Pescados:{ing:"Pescado fresco, guarnición a elección",cal:400},
+  Vegetariano:{ing:"Vegetales de estación",cal:320},
+  Celíacos:{ing:"Ingredientes sin TACC",cal:400},
+  Infantil:{ing:"Porción infantil",cal:400},
+  Brunch:{ing:"Café, medialunas, tostadas",cal:500},
+  Tostados:{ing:"Pan, jamón, queso",cal:330},
+  Cafetería:{ing:"Bebida caliente",cal:100},
+  Patisserie:{ing:"Postre artesanal",cal:400},
+  Postres:{ing:"Postre artesanal",cal:350},
+  Bebidas:{ing:"Bebida a elección",cal:120},
+};
+function getNutri(it){return NUTRI[it.id]||NUTRI_DEFAULT[it.cat]||{ing:it.desc||'Ingredientes varios',cal:400}}
+
+// ═══ EXTRAS PER CATEGORY (add-on ingredients) ═══
+const CAT_EXTRAS={
+  Milanesas:[
+    {name:'Huevo frito',pr:1500},{name:'Panceta extra',pr:2500},{name:'Cheddar extra',pr:2000},
+    {name:'Papas fritas extra',pr:3000},{name:'Salsa BBQ',pr:800},{name:'Ensalada mixta',pr:3500}
+  ],
+  Pizzanesa:[
+    {name:'Muzzarella extra',pr:2500},{name:'Jamón extra',pr:2000},{name:'Huevo frito',pr:1500},
+    {name:'Papas fritas',pr:3000}
+  ],
+  Pizzas:[
+    {name:'Muzzarella extra',pr:2500},{name:'Jamón extra',pr:2000},{name:'Aceitunas extra',pr:1000},
+    {name:'Rúcula',pr:1500},{name:'Huevo frito',pr:1500}
+  ],
+  Sandwiches:[
+    {name:'Huevo frito',pr:1500},{name:'Panceta',pr:2500},{name:'Cheddar extra',pr:2000},
+    {name:'Papas fritas',pr:3000},{name:'Cebolla crispy',pr:1000}
+  ],
+  Ensaladas:[
+    {name:'Pollo grillado',pr:4000},{name:'Palta',pr:2000},{name:'Huevo extra',pr:1500},
+    {name:'Parmesano',pr:1500},{name:'Croutons',pr:1000}
+  ],
+  Pastas:[
+    {name:'Salsa bolognesa',pr:2500},{name:'Salsa 4 quesos',pr:3000},{name:'Salsa fileto',pr:2000},
+    {name:'Parmesano rallado',pr:1500},{name:'Panceta extra',pr:2500}
+  ],
+  Carnes:[
+    {name:'Papas fritas',pr:3000},{name:'Ensalada mixta',pr:3500},{name:'Puré',pr:2500},
+    {name:'Huevo frito',pr:1500},{name:'Salsa chimichurri',pr:800}
+  ],
+  Pollo:[
+    {name:'Papas fritas',pr:3000},{name:'Ensalada mixta',pr:3500},{name:'Puré',pr:2500},
+    {name:'Salsa de hongos',pr:2000}
+  ],
+  Cerdo:[
+    {name:'Papas fritas',pr:3000},{name:'Ensalada mixta',pr:3500},{name:'Batatas al horno',pr:3000},
+    {name:'Salsa BBQ extra',pr:800}
+  ],
+  Pescados:[
+    {name:'Papas fritas',pr:3000},{name:'Ensalada mixta',pr:3500},{name:'Puré',pr:2500},
+    {name:'Salsa tártara extra',pr:800},{name:'Limón extra',pr:500}
+  ],
+  Postres:[
+    {name:'Dulce de leche extra',pr:1000},{name:'Crema batida',pr:1000},{name:'Helado extra',pr:2000},
+    {name:'Salsa de chocolate',pr:1000}
+  ],
+  Picoteo:[
+    {name:'Papas fritas extra',pr:3000},{name:'Dip cheddar extra',pr:1500},{name:'Dip BBQ extra',pr:1000}
+  ],
+};
+
+// ═══ COMPLETE MENU DATA ═══
+// Price types: 'img' = 3 sizes (Individual/Mediana/Grande), 'cg' = 2 sizes (Chica/Grande), 'bi' = 2 sizes (Individual/Grande), 'sw' = 3 types (Burger/Mila/Lomito), 'single' = one price
+const M=[
+// ─── PICOTEO & ENTRADAS ───
+{id:"pic-sex",n:"Sextolet",cat:"Picoteo",img:IMG.picada,desc:"Jamón cocido, queso, salame, jamón crudo, fainá y aceitunas + 2 medias pintas",p:{s:26000},on:true},
+{id:"pic-pod",n:"Tabla La Poderosa",cat:"Picoteo",img:IMG.tabla,desc:"Milanesitas de ternera, pollo y merluza, aros de cebolla, rabas, bastones de muzza, aceitunas y papas + Jarra 1L",p:{s:55000},on:true},
+{id:"pic-pap",n:"Papas Cerveceras",cat:"Picoteo",img:IMG.papas_cheddar,desc:"Papas fritas, salsa cheddar, panceta y verdeo + 2 Chopps",p:{s:17000},on:true},
+{id:"pic-bast",n:"Bastoncitos de Muzzarella",cat:"Picoteo",img:IMG.mozzarella_sticks,desc:"6 unidades sobre espejo de fileto, lluvia de albahaca + dips BBQ y cheddar + 2 Chopps",p:{s:15000},on:true},
+
+// ─── MILANESAS & SUPREMAS ───
+{id:"mil-sim",n:"Milanesa",cat:"Milanesas",img:IMG.milanesa,desc:"Con papas fritas",p:{i:19000,m:33000,g:62000},on:true},
+{id:"mil-com",n:"Milanesa Completa",cat:"Milanesas",img:IMG.schnitzel,desc:"Lechuga, tomate, huevo y papas fritas",p:{i:20000,m:36000,g:66000},on:true},
+{id:"mil-nap",n:"Milanesa Napolitana",cat:"Milanesas",img:IMG.milanesa_napo,desc:"Con salsa, jamón y queso gratinado",p:{i:22000,m:38000,g:69000},on:true},
+{id:"mil-bbq",n:"Milanesa BBQ Premium",cat:"Milanesas",img:IMG.milanesa,desc:"Salsa BBQ, cheddar y cebolla crispy",p:{i:23000,m:39000,g:73000},on:true},
+{id:"mil-che",n:"Milanesa Cheddar Premium",cat:"Milanesas",img:IMG.milanesa_napo,desc:"Doble cheddar fundido y panceta",p:{i:24000,m:42000,g:77000},on:true},
+{id:"mil-sui",n:"Milanesa a la Suiza",cat:"Milanesas",img:IMG.schnitzel,desc:"Crema, champiñones y queso gratinado",p:{i:21000,m:38000,g:69000},on:true},
+{id:"mil-rio",n:"Milanesa Riojana",cat:"Milanesas",img:IMG.milanesa,desc:"Pimiento, cebolla y salsa criolla",p:{i:21000,m:38000,g:69000},on:true},
+{id:"mil-fio",n:"Milanesa Fiorentina",cat:"Milanesas",img:IMG.milanesa_napo,desc:"Espinaca, bechamel y queso gratinado",p:{i:21000,m:38000,g:69000},on:true},
+{id:"mil-med",n:"Milanesa Medellín",cat:"Milanesas",img:IMG.schnitzel,desc:"Palta, tomate y salsa especial",p:{i:21000,m:38000,g:69000},on:true},
+{id:"mil-cru",n:"Milanesa Crudo y Rúcula",cat:"Milanesas",img:IMG.milanesa,desc:"Jamón crudo, rúcula y parmesano",p:{i:24000,m:42000,g:77000},on:true},
+{id:"mil-far",n:"Milanesa Farola",cat:"Milanesas",img:IMG.milanesa_napo,desc:"La especialidad de la casa",p:{i:24000,m:42000,g:77000},on:true},
+{id:"mil-fug",n:"Milanesa Fugazza c/ Queso",cat:"Milanesas",img:IMG.schnitzel,desc:"Cebolla caramelizada y queso",p:{i:20000,m:36000,g:66000},on:true},
+{id:"mil-4q",n:"Milanesa 4 Quesos",cat:"Milanesas",img:IMG.milanesa_napo,desc:"Muzzarella, cheddar, roquefort y parmesano",p:{i:24000,m:42000,g:77000},on:true},
+
+// ─── PIZZANESA (para 2) ───
+{id:"pzn-muz",n:"Pizzanesa Muzzarella",cat:"Pizzanesa",img:IMG.milanesa_napo,desc:"Milanesa + pizza de muzza. Para 2 personas",p:{s:36000},on:true},
+{id:"pzn-nap",n:"Pizzanesa Napolitana",cat:"Pizzanesa",img:IMG.milanesa_napo,desc:"Milanesa + pizza napolitana. Para 2 personas",p:{s:42000},on:true},
+{id:"pzn-jm",n:"Pizzanesa Jamón y Morrón",cat:"Pizzanesa",img:IMG.milanesa,desc:"Milanesa + pizza jamón y morrón. Para 2 personas",p:{s:46000},on:true},
+{id:"pzn-fug",n:"Pizzanesa Fugazza c/ Queso",cat:"Pizzanesa",img:IMG.schnitzel,desc:"Milanesa + pizza fugazza. Para 2 personas",p:{s:42000},on:true},
+{id:"pzn-ame",n:"Pizzanesa Americana",cat:"Pizzanesa",img:IMG.milanesa_napo,desc:"Milanesa + pizza americana. Para 2 personas",p:{s:42000},on:true},
+
+// ─── PIZZAS ───
+{id:"piz-muz",n:"Pizza Muzzarella",cat:"Pizzas",img:IMG.pizza_muzza,desc:"Clásica con muzzarella y aceitunas",p:{i:11000,g:22000},on:true},
+{id:"piz-ver",n:"Pizza Verdura",cat:"Pizzas",img:IMG.pizza_special,desc:"Vegetales frescos de estación",p:{i:10000,g:20000},on:true},
+{id:"piz-fuq",n:"Pizza Fugazza c/ Queso",cat:"Pizzas",img:IMG.pizza_fugazza,desc:"Cebolla y queso",p:{i:12000,g:24000},on:true},
+{id:"piz-nap",n:"Pizza Napolitana",cat:"Pizzas",img:IMG.pizza_napo,desc:"Tomate, ajo y albahaca",p:{i:12000,g:24000},on:true},
+{id:"piz-jam",n:"Pizza Jamón",cat:"Pizzas",img:IMG.pizza_muzza,desc:"Jamón cocido y muzzarella",p:{i:12000,g:24000},on:true},
+{id:"piz-jmo",n:"Pizza Jamón y Morrones",cat:"Pizzas",img:IMG.pizza_special,desc:"Jamón, morrones y aceitunas",p:{i:14000,g:28000},on:true},
+{id:"piz-npe",n:"Pizza Napo Especial",cat:"Pizzas",img:IMG.pizza_napo,desc:"Napolitana con ingredientes premium",p:{i:14000,g:26000},on:true},
+{id:"piz-cr",n:"Pizza Crudo y Rúcula",cat:"Pizzas",img:IMG.pizza_special,desc:"Jamón crudo, rúcula y parmesano",p:{i:16000,g:32000},on:true},
+{id:"piz-fgz",n:"Pizza Fugazzeta",cat:"Pizzas",img:IMG.pizza_fugazza,desc:"Rellena de cebolla y queso",p:{i:16000,g:32000},on:true},
+{id:"piz-fge",n:"Pizza Fugazzeta Especial",cat:"Pizzas",img:IMG.pizza_fugazza,desc:"Fugazzeta premium con jamón",p:{i:18000,g:36000},on:true},
+{id:"piz-cal",n:"Calzón Común",cat:"Pizzas",img:IMG.calzone,desc:"Relleno de jamón y muzzarella",p:{i:16000,g:32000},on:true},
+{id:"piz-cala",n:"Pizza Calabresa",cat:"Pizzas",img:IMG.pizza_special,desc:"Longaniza calabresa y muzzarella",p:{i:14000,g:28000},on:true},
+{id:"piz-roq",n:"Pizza Roquefort",cat:"Pizzas",img:IMG.pizza_muzza,desc:"Queso roquefort y nueces",p:{i:14000,g:28000},on:true},
+{id:"piz-far",n:"Pizza Farola",cat:"Pizzas",img:IMG.pizza_special,desc:"La especialidad de la casa",p:{i:16000,g:32000},on:true},
+{id:"piz-fai",n:"Fainá",cat:"Pizzas",img:IMG.faina,desc:"Fainá clásico de garbanzos",p:{s:2000},on:true},
+
+// ─── SANDWICHES ───
+{id:"sw-cla",n:"Sándwich Clásico",cat:"Sandwiches",img:IMG.burger,desc:"Lechuga, tomate y aderezos",p:{b:14000,ml:16000,lo:18000},on:true},
+{id:"sw-full",n:"Sándwich Full Full",cat:"Sandwiches",img:IMG.burger_bacon,desc:"Completo con huevo, jamón y queso",p:{b:16000,ml:18000,lo:20000},on:true},
+{id:"sw-bbq",n:"Sándwich BBQ",cat:"Sandwiches",img:IMG.burger,desc:"Salsa BBQ, cebolla crispy y cheddar",p:{b:18000,ml:20000,lo:22000},on:true},
+{id:"sw-ched",n:"Sándwich Cheddar",cat:"Sandwiches",img:IMG.burger_bacon,desc:"Doble cheddar fundido y panceta",p:{b:18000,ml:20000,lo:22000},on:true},
+
+// ─── ENSALADAS PREMIUM ───
+{id:"ens-mix",n:"Ensalada Mixta",cat:"Ensaladas",img:IMG.ensalada,desc:"Lechuga, tomate, cebolla y huevo",p:{s:9000},on:true},
+{id:"ens-zah",n:"Ensalada Zanahoria y Huevo",cat:"Ensaladas",img:IMG.ensalada,desc:"Zanahoria rallada, huevo y aceitunas",p:{s:9000},on:true},
+{id:"ens-ruc",n:"Rúcula, Cherry y Parmesano",cat:"Ensaladas",img:IMG.ensalada,desc:"Rúcula, tomate cherry, parmesano y balsámico",p:{s:12000},on:true},
+{id:"ens-ser",n:"Ensalada Serrana",cat:"Ensaladas",img:IMG.cesar,desc:"Mix de hojas, jamón serrano y queso",p:{s:18000},on:true},
+{id:"ens-comp",n:"Ensalada Completa",cat:"Ensaladas",img:IMG.ensalada,desc:"Todos los ingredientes frescos",p:{s:18000},on:true},
+{id:"ens-exp",n:"Ensalada Express",cat:"Ensaladas",img:IMG.cesar,desc:"Rápida y nutritiva",p:{s:18000},on:true},
+{id:"ens-cap",n:"Ensalada Capresse",cat:"Ensaladas",img:IMG.caprese,desc:"Tomate, muzzarella y albahaca",p:{s:18000},on:true},
+{id:"ens-far",n:"Ensalada Farola",cat:"Ensaladas",img:IMG.ensalada,desc:"Especialidad de la casa",p:{s:18000},on:true},
+{id:"ens-cae",n:"Ensalada Caesar",cat:"Ensaladas",img:IMG.cesar,desc:"Lechuga, pollo, croutons y parmesano",p:{s:18000},on:true},
+{id:"ens-esp",n:"Ensalada Española",cat:"Ensaladas",img:IMG.ensalada,desc:"Estilo mediterráneo",p:{s:18000},on:true},
+
+// ─── PASTAS CASERAS ───
+{id:"pas-tag",n:"Tagliatelle",cat:"Pastas",img:IMG.tagliatelle,desc:"Pasta fresca al huevo, elegí tu salsa",p:{c:17000,g:30000},on:true},
+{id:"pas-noq",n:"Ñoquis",cat:"Pastas",img:IMG.noquis,desc:"Ñoquis de papa caseros, elegí tu salsa",p:{c:17000,g:30000},on:true},
+{id:"pas-rav",n:"Ravioles",cat:"Pastas",img:IMG.ravioles,desc:"Rellenos de ricota y espinaca, elegí tu salsa",p:{c:19000,g:35000},on:true},
+{id:"pas-sor",n:"Sorrentinos",cat:"Pastas",img:IMG.sorrentinos,desc:"Rellenos de jamón y queso, elegí tu salsa",p:{c:20000,g:36000},on:true},
+{id:"pas-can",n:"Canelones",cat:"Pastas",img:IMG.canelones,desc:"Rellenos de verdura o carne, elegí tu salsa",p:{c:20000,g:36000},on:true},
+{id:"pas-car",n:"Pasta Carbonara",cat:"Pastas",img:IMG.carbonara,desc:"Spaghetti cremoso, panceta y parmesano",p:{c:19000,g:34000},on:true},
+{id:"pas-bol",n:"Pasta Bolognesa",cat:"Pastas",img:IMG.bolognesa,desc:"Tallarines con bolognesa casera",p:{c:18000,g:32000},on:true},
+{id:"pas-4q",n:"Pasta 4 Quesos",cat:"Pastas",img:IMG.carbonara,desc:"Salsa cremosa de 4 quesos",p:{c:20000,g:36000},on:true},
+{id:"pas-est",n:"Pasta al Estofado",cat:"Pastas",img:IMG.bolognesa,desc:"Salsa estofado con carne",p:{c:22000,g:40000},on:true},
+
+// ─── POLLO ───
+{id:"pol-arr",n:"Arroz c/ Pollo Valenciana",cat:"Pollo",img:IMG.arroz_pollo,desc:"Arroz con pollo estilo valenciana",p:{s:18000},on:true},
+{id:"pol-wok",n:"Wok de Pollo y Vegetales",cat:"Pollo",img:IMG.pollo_wok,desc:"Pollo salteado con vegetales al wok",p:{s:19000},on:true},
+{id:"pol-14f",n:"1/4 Pollo con Fritas",cat:"Pollo",img:IMG.pollo,desc:"Cuarto de pollo crocante + papas fritas",p:{s:17000},on:true},
+{id:"pol-14v",n:"1/4 Pollo al Verdeo",cat:"Pollo",img:IMG.pollo,desc:"Al verdeo, ajillo o provenzal",p:{s:19000},on:true},
+{id:"pol-14c",n:"1/4 Pollo al Champiñón",cat:"Pollo",img:IMG.pollo,desc:"Con salsa de champiñones",p:{s:20000},on:true},
+{id:"pol-12v",n:"1/2 Pollo al Verdeo",cat:"Pollo",img:IMG.pollo,desc:"Medio pollo al verdeo, ajillo o provenzal",p:{s:28000},on:true},
+{id:"pol-12c",n:"1/2 Pollo al Champiñón",cat:"Pollo",img:IMG.pollo,desc:"Medio pollo con salsa de champiñones",p:{s:29000},on:true},
+
+// ─── CARNES ───
+{id:"car-mat",n:"Matambre a la Pizza 700g",cat:"Carnes",img:IMG.matambre,desc:"Matambre entero con salsa, jamón y muzza",p:{s:45000},on:true},
+{id:"car-mam",n:"1/2 Matambre 350g",cat:"Carnes",img:IMG.matambre,desc:"Medio matambre a la pizza",p:{s:25000},on:true},
+{id:"car-lom",n:"Lomo al Champiñón 450g",cat:"Carnes",img:IMG.lomo,desc:"Lomo de ternera con salsa de champiñones",p:{s:32000},on:true},
+{id:"car-asa",n:"Asado de Tira Banderita",cat:"Carnes",img:IMG.asado,desc:"Asado de tira a la parrilla",p:{s:28000},on:true},
+{id:"car-bif",n:"Mini Bife de Chorizo 400g",cat:"Carnes",img:IMG.bife,desc:"Bife de chorizo jugoso",p:{s:26000},on:true},
+{id:"car-blom",n:"Bife de Lomo 400g",cat:"Carnes",img:IMG.lomo,desc:"Bife de lomo premium",p:{s:30000},on:true},
+
+// ─── CERDO ───
+{id:"cer-cos2",n:"Costillitas a la Riojana (2)",cat:"Cerdo",img:IMG.costillas,desc:"2 costillitas con salsa criolla",p:{s:19000},on:true},
+{id:"cer-cos1",n:"Costillita con Fritas",cat:"Cerdo",img:IMG.costillas,desc:"Costillita con papas fritas",p:{s:15000},on:true},
+{id:"cer-mtb",n:"Matambrito al Verdeo",cat:"Cerdo",img:IMG.matambrito,desc:"Matambrito de cerdo con salsa al verdeo",p:{s:20000},on:true},
+
+// ─── PESCADOS ───
+{id:"pes-rab",n:"Rabas a la Romana 600g",cat:"Pescados",img:IMG.rabas,desc:"Rabas crocantes con limón",p:{s:30000},on:true},
+{id:"pes-rab2",n:"1/2 Rabas 300g",cat:"Pescados",img:IMG.rabas,desc:"Media porción de rabas",p:{s:18000},on:true},
+{id:"pes-mer",n:"Filet de Merluza (2)",cat:"Pescados",img:IMG.merluza,desc:"Dos filets de merluza con guarnición",p:{s:17000},on:true},
+{id:"pes-sal",n:"Salmón 400g",cat:"Pescados",img:IMG.salmon,desc:"Salmón rosado a la plancha",p:{s:32000},on:true},
+{id:"pes-cal",n:"Arroz con Calamares",cat:"Pescados",img:IMG.rabas,desc:"Arroz cremoso con calamares",p:{s:19000},on:true},
+
+// ─── VEGETARIANO ───
+{id:"veg-wok",n:"Wok de Vegetales",cat:"Vegetariano",img:IMG.wok_veg,desc:"Vegetales salteados al wok",p:{s:15000},on:true},
+{id:"veg-tal",n:"Tallarines con Vegetales",cat:"Vegetariano",img:IMG.tagliatelle,desc:"Tallarines frescos con vegetales de estación",p:{s:17000},on:true},
+{id:"veg-ome",n:"Omelette Capresse",cat:"Vegetariano",img:IMG.omelette,desc:"Tomate, muzza y albahaca",p:{s:15000},on:true},
+{id:"veg-piz",n:"Pizza Veggie Individual",cat:"Vegetariano",img:IMG.pizza_special,desc:"Pizza con vegetales",p:{s:12000},on:true},
+
+// ─── CELÍACOS ───
+{id:"cel-rav",n:"Ravioles Sin TACC",cat:"Celíacos",img:IMG.ravioles,desc:"Ravioles espinaca y ricota aptos celíacos",p:{s:30000},on:true},
+{id:"cel-sor",n:"Sorrentinos Sin TACC",cat:"Celíacos",img:IMG.sorrentinos,desc:"Sorrentinos jamón y queso aptos celíacos",p:{s:30000},on:true},
+
+// ─── MENÚ INFANTIL ───
+{id:"inf-men",n:"Menú Infantil",cat:"Infantil",img:IMG.infantil,desc:"Plato + Bebida + Postre para los más chicos",p:{s:14000},on:true},
+
+// ─── BRUNCH ───
+{id:"bru-far",n:"Brunch La Farolera",cat:"Brunch",img:IMG.brunch,desc:"2 infusiones, 2 jugos, torta, tostado, medialunas, sandwiches, tostadas",p:{s:39000},on:true},
+
+// ─── TOSTADOS ───
+{id:"tos-mix",n:"Tostado Mixto",cat:"Tostados",img:IMG.tostado,desc:"Jamón y queso clásico",p:{s:9000},on:true},
+{id:"tos-ara",n:"Pan Árabe",cat:"Tostados",img:IMG.tostado,desc:"Pan árabe relleno",p:{s:9000},on:true},
+{id:"tos-cia",n:"Ciabatta Fresca",cat:"Tostados",img:IMG.tostado,desc:"Pan ciabatta tostado y relleno",p:{s:10000},on:true},
+{id:"tos-med",n:"Medialuna Mixta (2)",cat:"Tostados",img:IMG.medialunas,desc:"2 medialunas con jamón y queso",p:{s:8000},on:true},
+{id:"tos-crm",n:"Croque Madame",cat:"Tostados",img:IMG.croque,desc:"Clásico francés con huevo, jamón, queso y bechamel",p:{s:15000},on:true},
+{id:"tos-crc",n:"Croque Chicken",cat:"Tostados",img:IMG.croque,desc:"Pollo, queso y bechamel",p:{s:15000},on:true},
+{id:"tos-ame",n:"Tostadita Americana",cat:"Tostados",img:IMG.tostado,desc:"Estilo americano con bacon y huevo",p:{s:12000},on:true},
+
+// ─── CAFETERÍA ───
+{id:"caf-caf",n:"Café",cat:"Cafetería",img:IMG.cafe,desc:"Espresso clásico",p:{s:3000},on:true},
+{id:"caf-ccr",n:"Café con Crema",cat:"Cafetería",img:IMG.cafe,desc:"Espresso con crema batida",p:{s:4000},on:true},
+{id:"caf-ame",n:"Americano",cat:"Cafetería",img:IMG.cafe,desc:"Café largo estilo americano",p:{s:3500},on:true},
+{id:"caf-dob",n:"Doble",cat:"Cafetería",img:IMG.cafe,desc:"Doble espresso",p:{s:5500},on:true},
+{id:"caf-ccl",n:"Café con Leche",cat:"Cafetería",img:IMG.cappuccino,desc:"Espresso con leche caliente",p:{s:4500},on:true},
+{id:"caf-cap",n:"Capuchino",cat:"Cafetería",img:IMG.cappuccino,desc:"Espresso, leche espumada y cacao",p:{s:5000},on:true},
+{id:"caf-sub",n:"Submarino",cat:"Cafetería",img:IMG.submarino,desc:"Leche caliente con chocolate",p:{s:6000},on:true},
+{id:"caf-te",n:"Té",cat:"Cafetería",img:IMG.cafe,desc:"Variedad de infusiones",p:{s:3500},on:true},
+
+// ─── PATISSERIE ───
+{id:"pat-bm",n:"Black Mamba",cat:"Patisserie",img:IMG.torta,desc:"Torta de chocolate intensa",p:{s:11000},on:true},
+{id:"pat-ch",n:"Chajá",cat:"Patisserie",img:IMG.torta,desc:"Clásico chajá con merengue y durazno",p:{s:11000},on:true},
+{id:"pat-sn",n:"Selva Negra",cat:"Patisserie",img:IMG.torta,desc:"Chocolate, crema y cerezas",p:{s:11000},on:true},
+{id:"pat-ti",n:"Tiramisú",cat:"Patisserie",img:IMG.tiramisu,desc:"Clásico italiano con mascarpone y café",p:{s:11000},on:true},
+{id:"pat-ck",n:"Cheesecake",cat:"Patisserie",img:IMG.cheesecake,desc:"New York style con frutos rojos",p:{s:11000},on:true},
+{id:"pat-bt",n:"Brownie Top",cat:"Patisserie",img:IMG.brownie,desc:"Brownie con topping premium",p:{s:11000},on:true},
+{id:"pat-ac",n:"Apple Crumble",cat:"Patisserie",img:IMG.torta,desc:"Manzana con crumble crocante",p:{s:11000},on:true},
+{id:"pat-or",n:"Oreo",cat:"Patisserie",img:IMG.cheesecake,desc:"Torta Oreo cremosa",p:{s:11000},on:true},
+{id:"pat-ct",n:"Chocotorta",cat:"Patisserie",img:IMG.torta,desc:"Clásica chocotorta argentina",p:{s:11000},on:true},
+{id:"pat-lp",n:"Lemon Pie",cat:"Patisserie",img:IMG.torta,desc:"Tarta de limón con merengue",p:{s:11000},on:true},
+{id:"pat-rv",n:"Red Velvet",cat:"Patisserie",img:IMG.torta,desc:"Red Velvet con frosting de cream cheese",p:{s:11000},on:true},
+
+// ─── POSTRES ───
+{id:"pos-fla",n:"Flan Casero",cat:"Postres",img:IMG.flan,desc:"Con dulce de leche y crema",p:{s:4950},on:true},
+{id:"pos-bud",n:"Budín de Pan",cat:"Postres",img:IMG.budin,desc:"Budín de pan casero con salsa de caramelo",p:{s:5000},on:true},
+{id:"pos-fru",n:"Ensalada de Frutas",cat:"Postres",img:IMG.frutas,desc:"Frutas frescas de estación",p:{s:5000},on:true},
+{id:"pos-hel",n:"Helado 3 Bochas",cat:"Postres",img:IMG.helado,desc:"3 bochas del sabor que elijas",p:{s:10000},on:true},
+{id:"pos-bro",n:"Brownie con Helado",cat:"Postres",img:IMG.brownie,desc:"Brownie tibio con helado de vainilla",p:{s:10000},on:true},
+
+// ─── BEBIDAS ───
+{id:"beb-gas",n:"Gaseosa",cat:"Bebidas",img:IMG.gaseosa,desc:"Coca-Cola, Sprite, Fanta",p:{s:3800},on:true},
+{id:"beb-agu",n:"Agua Saborizada",cat:"Bebidas",img:IMG.agua,desc:"Levité pomelo, manzana o naranja",p:{s:3800},on:true},
+{id:"beb-jug",n:"Jugo Natural",cat:"Bebidas",img:IMG.jugo,desc:"Naranja, pomelo o limonada",p:{s:6500},on:true},
+{id:"beb-cho",n:"Chopp",cat:"Bebidas",img:IMG.cerveza,desc:"Cerveza tirada de barril",p:{s:4500},on:true},
+{id:"beb-tir",n:"Cerveza Tirada 1L",cat:"Bebidas",img:IMG.cerveza,desc:"Jarra de cerveza tirada",p:{s:8500},on:true},
+{id:"beb-mil",n:"Miller 1L",cat:"Bebidas",img:IMG.cerveza,desc:"Cerveza Miller Genuine Draft",p:{s:11000},on:true},
+{id:"beb-hei",n:"Heineken 1L",cat:"Bebidas",img:IMG.cerveza,desc:"Cerveza Heineken importada",p:{s:13000},on:true},
+{id:"beb-fer",n:"Fernet Cola",cat:"Bebidas",img:IMG.fernet,desc:"Fernet Branca con Coca-Cola",p:{s:7000},on:true},
+{id:"beb-vtb",n:"Vino Tinto / Blanco",cat:"Bebidas",img:IMG.vino,desc:"Copa o botella, consultá variedades",p:{s:10000},on:true},
+];
+
+// ═══ SIZE LABELS ═══
+const SZ_LABELS = {
+  i:'Individual', m:'Mediana', g:'Grande',   // Milanesas (3 sizes)
+  c:'Chica', /* g already defined */          // Pastas (2 sizes)
+  b:'Burger', ml:'Milanesa', lo:'Lomito',     // Sandwiches (3 types)
+  s:'',                                       // Single price
+};
+
+// ═══ STATE ═══
+let mesa=1,cart=[],orders=[],sesTotal=0,payMeth=null,bc=null,activeCat='all',userRating=0;
+const fmt=n=>'$'+n.toLocaleString('es-AR');
+
+// ═══ INIT ═══
+document.addEventListener('DOMContentLoaded',()=>{
+  const p=new URLSearchParams(location.search);
+  mesa=parseInt(p.get('mesa'))||1;
+  document.getElementById('mesaNum').textContent=mesa;
+  document.getElementById('mesaNumHero').textContent=mesa;
+  initSync();renderCats();renderMenu();initHeaderScroll();initCatsScroll();
+});
+
+function initCatsScroll(){
+  const cats=document.getElementById('cats');
+  const wrap=document.getElementById('catsWrap');
+  if(cats&&wrap){cats.addEventListener('scroll',()=>{wrap.classList.toggle('scrolled',cats.scrollLeft>10)},{passive:true})}
+}
+
+function initHeaderScroll(){
+  const hdr=document.getElementById('mainHdr');
+  const hero=document.getElementById('heroSec');
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{hdr.style.opacity=e.isIntersecting?'0':'1';hdr.style.pointerEvents=e.isIntersecting?'none':'all'});
+  },{threshold:0.1});
+  obs.observe(hero);
+  window.addEventListener('scroll',()=>hdr.classList.toggle('scrolled',window.scrollY>100),{passive:true});
+}
+
+// ═══ SYNC ═══
+function initSync(){
+  try{bc=new BroadcastChannel('lafarola')}catch(e){}
+  if(bc)bc.onmessage=e=>handleMsg(e.data);
+  window.addEventListener('storage',e=>{
+    if(e.key==='lf_ev')try{handleMsg(JSON.parse(e.newValue))}catch(er){}
+    if(e.key==='lf_menu')syncMenuFromPOS();
+  });
+  // Sync menu from POS on load
+  syncMenuFromPOS();
+  if(DEMO){document.getElementById('stxt').textContent='Demo';document.getElementById('heroStatusText').textContent='Modo Demo';showToast('🧪 Modo Demo — Abrí el POS en otra pestaña')}
+}
+function send(msg){msg.ts=Date.now();msg.mesa=mesa;if(bc)bc.postMessage(msg);try{localStorage.setItem('lf_ev',JSON.stringify(msg))}catch(e){}}
+function handleMsg(msg){
+  if(!msg||!msg.type)return;
+  // Menu sync from POS
+  if(msg.type==='menu_update'){syncMenuFromPOS();return}
+  if(msg.mesa!==mesa)return;
+  const st=document.getElementById('statusTxt');
+  switch(msg.type){
+    case'order_confirmed':updOrd(msg.orderId,'confirmado');showToast('✅ Pedido confirmado!');if(st)st.textContent='🍳 Preparando...';break;
+    case'order_preparing':updOrd(msg.orderId,'preparando');showToast('🍳 Preparando tu pedido');if(st)st.textContent='🍳 En preparación...';break;
+    case'order_served':updOrd(msg.orderId,'servido');showToast('🍽️ ¡Servido! Buen provecho');if(st)st.textContent='🍽️ ¡Servido!';break;
+    case'payment_confirmed':payMeth=msg.method||'efectivo';showSc('scDone');renderRcpt();confetti();showToast('✅ Pago confirmado!');break;
+  }
+}
+// Sync menu on/off state from POS localStorage
+function syncMenuFromPOS(){
+  try{
+    const posMenu=JSON.parse(localStorage.getItem('lf_menu'));
+    if(!posMenu||!Array.isArray(posMenu))return;
+    const posMap=new Map(posMenu.map(i=>[i.id,i]));
+    M.forEach(item=>{
+      const posItem=posMap.get(item.id);
+      if(posItem){
+        item.on=posItem.on;
+        if(posItem.p)item.p=posItem.p;
+        if(posItem.n)item.n=posItem.n;
+        if(posItem.desc)item.desc=posItem.desc;
+        if(posItem.img)item.img=posItem.img;
+      }
+    });
+    renderMenu();
+  }catch(e){}
+}
+
+// ═══ CATEGORIES ═══
+function renderCats(){
+  const cats=[...new Set(M.map(i=>i.cat))];
+  const emojis={Picoteo:'🍢',Milanesas:'🍗',Pizzanesa:'🔥',Pizzas:'🍕',Sandwiches:'🍔',Ensaladas:'🥗',Pastas:'🍝',Pollo:'🐔',Carnes:'🥩',Cerdo:'🐷',Pescados:'🐟',Vegetariano:'🥬',Celíacos:'🌾',Infantil:'👶',Brunch:'☕',Tostados:'🥪',Cafetería:'☕',Patisserie:'🎂',Postres:'🍮',Bebidas:'🥤'};
+  let h='<button class="cat active" onclick="filterCat(\'all\',this)">Todos</button>';
+  cats.forEach(c=>{h+=`<button class="cat" onclick="filterCat('${c}',this)">${emojis[c]||'🍽️'} ${c}</button>`});
+  document.getElementById('cats').innerHTML=h;
+}
+function filterCat(cat,el){activeCat=cat;document.querySelectorAll('.cat').forEach(c=>c.classList.remove('active'));el.classList.add('active');document.getElementById('menuLabel').innerHTML=cat==='all'?'Todo el menú <span class="menu-count" id="menuCount"></span>':cat+' <span class="menu-count" id="menuCount"></span>';renderMenu();
+  // Auto-scroll category into view
+  el.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+}
+
+// ═══ RENDER MENU ═══
+function renderMenu(){
+  const q=(document.getElementById('searchIn').value||'').toLowerCase().trim();
+  const items=M.filter(i=>{
+    if(i.on===false)return false;
+    if(activeCat!=='all'&&i.cat!==activeCat)return false;
+    if(q&&!i.n.toLowerCase().includes(q)&&!i.desc.toLowerCase().includes(q)&&!i.cat.toLowerCase().includes(q))return false;
+    return true;
+  });
+  
+  const countEl=document.getElementById('menuCount');
+  if(countEl)countEl.textContent=`(${items.length})`;
+  
+  const grid=document.getElementById('mgrid');
+  grid.innerHTML=items.map((it,idx)=>{
+    const keys=Object.keys(it.p);
+    let sizesHtml='';
+    
+    if(keys.length===1&&keys[0]==='s'){
+      // Single price
+      sizesHtml=`<div class="sizes"><button class="sbtn single" onclick="addToCart('${it.id}','s')"><span class="sl">Agregar</span><span class="sp">${fmt(it.p.s)}</span></button></div>`;
+    } else if(it.p.b!==undefined){
+      // Sandwich: burger/mila/lomito
+      sizesHtml=`<div class="sizes">
+        <button class="sbtn" onclick="addToCart('${it.id}','b')"><span class="sl">Burger</span><span class="sp">${fmt(it.p.b)}</span></button>
+        <button class="sbtn" onclick="addToCart('${it.id}','ml')"><span class="sl">Milanesa</span><span class="sp">${fmt(it.p.ml)}</span></button>
+        <button class="sbtn" onclick="addToCart('${it.id}','lo')"><span class="sl">Lomito</span><span class="sp">${fmt(it.p.lo)}</span></button>
+      </div>`;
+    } else if(it.p.c!==undefined){
+      // Pastas: chica/grande
+      sizesHtml=`<div class="sizes">
+        <button class="sbtn" onclick="addToCart('${it.id}','c')"><span class="sl">Chica</span><span class="sp">${fmt(it.p.c)}</span></button>
+        <button class="sbtn" onclick="addToCart('${it.id}','g')"><span class="sl">Grande</span><span class="sp">${fmt(it.p.g)}</span></button>
+      </div>`;
+    } else if(it.p.i!==undefined&&it.p.m!==undefined){
+      // Milanesas: ind/med/grande
+      sizesHtml=`<div class="sizes">
+        <button class="sbtn" onclick="addToCart('${it.id}','i')"><span class="sl">Individual</span><span class="sp">${fmt(it.p.i)}</span></button>
+        <button class="sbtn" onclick="addToCart('${it.id}','m')"><span class="sl">Mediana</span><span class="sp">${fmt(it.p.m)}</span></button>
+        <button class="sbtn" onclick="addToCart('${it.id}','g')"><span class="sl">Grande</span><span class="sp">${fmt(it.p.g)}</span></button>
+      </div>`;
+    } else if(it.p.i!==undefined&&it.p.g!==undefined){
+      // Pizzas: ind/grande
+      sizesHtml=`<div class="sizes">
+        <button class="sbtn" onclick="addToCart('${it.id}','i')"><span class="sl">Individual</span><span class="sp">${fmt(it.p.i)}</span></button>
+        <button class="sbtn" onclick="addToCart('${it.id}','g')"><span class="sl">Grande</span><span class="sp">${fmt(it.p.g)}</span></button>
+      </div>`;
+    }
+    
+    return `<div class="mcard${it.on?'':' off'}" style="animation-delay:${Math.min(idx*30,600)}ms">
+      <div class="mcard-body">
+        <div class="mcard-img-wrap">
+          <img src="${it.img}" alt="${it.n}" loading="lazy" onload="this.parentNode.querySelector('.img-emoji').classList.remove('vis')" onerror="this.style.display='none';this.parentNode.querySelector('.img-emoji').classList.add('vis')">
+          <div class="img-emoji vis">${CAT_EMOJI[it.cat]||'🍽️'}</div>
+        </div>
+        <div class="mcard-info">
+          <div class="mcard-cat">${it.cat}</div>
+          <div class="mcard-name">${it.n}</div>
+          <div class="mcard-desc">${it.desc}</div>
+          <div style="font-size:.65rem;color:var(--text-mut);margin-top:3px;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden">📋 ${getNutri(it).ing} · 🔥 ${getNutri(it).cal}kcal</div>
+        </div>
+      </div>${sizesHtml}</div>`;
+  }).join('');
+  
+  if(!items.length)grid.innerHTML=`<div style="text-align:center;padding:60px 20px;grid-column:1/-1"><div style="font-size:3rem;margin-bottom:12px">🔍</div><div style="font-family:var(--heading);font-size:1.1rem;font-weight:700;margin-bottom:6px">No encontramos nada</div><div style="color:var(--text-sec);font-size:.85rem">Probá con otra búsqueda o categoría</div></div>`;
+}
+
+// ═══ CART ═══
+// ═══ INGREDIENT MODAL STATE ═══
+let pendingItem=null,pendingSize=null,selectedExtras=[];
+
+function addToCart(id,sz){
+  const it=M.find(i=>i.id===id);if(!it||!it.on)return;
+  const price=it.p[sz];if(!price)return;
+  const extras=CAT_EXTRAS[it.cat];
+  // If no extras available for this category, add directly
+  if(!extras||extras.length===0){doAddToCart(id,sz,[]);return}
+  // Open ingredient customization modal
+  pendingItem=it;pendingSize=sz;selectedExtras=[];
+  const nutri=getNutri(it);
+  const label=SZ_LABELS[sz]||'';
+  const imgUrl=it.img||'https://loremflickr.com/200/200/food,restaurant';
+  // Render modal header
+  document.getElementById('ingHdr').innerHTML=`<img src="${imgUrl}" alt="${it.n}" onerror="this.style.display='none'"/><div class="ing-modal-hdr-info"><div class="ing-modal-hdr-name">${it.n}${label?' ('+label+')':''}</div><div class="ing-modal-hdr-meta">${fmt(price)} · ${nutri.cal} kcal</div></div>`;
+  // Render modal body
+  let html=`<div class="ing-info-row"><div class="ing-info-pill">🔥 <b>${nutri.cal} kcal</b></div><div class="ing-info-pill">📋 ${label||'Porción única'}</div></div>`;
+  html+=`<div class="ing-section"><div class="ing-section-title">📝 Ingredientes</div><div style="font-size:.78rem;color:var(--text-sec);line-height:1.5;margin-bottom:8px">${nutri.ing}</div></div>`;
+  html+=`<div class="ing-section"><div class="ing-section-title">➕ Agregá ingredientes extras</div>`;
+  extras.forEach((ex,i)=>{
+    html+=`<div class="ing-item"><div class="ing-check" id="ingChk${i}" onclick="toggleExtra(${i})"></div><div class="ing-label">${ex.name}</div><div class="ing-price">+${fmt(ex.pr)}</div></div>`;
+  });
+  html+=`</div>`;
+  document.getElementById('ingBody').innerHTML=html;
+  updateIngConfirmBtn();
+  document.getElementById('ingOv').classList.add('open');
+}
+function toggleExtra(i){
+  const idx=selectedExtras.indexOf(i);
+  if(idx>-1)selectedExtras.splice(idx,1);else selectedExtras.push(i);
+  const chk=document.getElementById('ingChk'+i);
+  chk.classList.toggle('active');
+  chk.textContent=chk.classList.contains('active')?'✓':'';
+  updateIngConfirmBtn();
+}
+function updateIngConfirmBtn(){
+  if(!pendingItem)return;
+  const base=pendingItem.p[pendingSize]||0;
+  const extras=pendingItem.cat?CAT_EXTRAS[pendingItem.cat]:[];
+  const extrasTotal=selectedExtras.reduce((s,i)=>(extras&&extras[i]?s+extras[i].pr:s),0);
+  document.getElementById('ingConfirm').textContent=`🛒 Agregar ${fmt(base+extrasTotal)}`;
+}
+function closeIngModal(){
+  document.getElementById('ingOv').classList.remove('open');
+  pendingItem=null;pendingSize=null;selectedExtras=[];
+}
+function confirmAddToCart(){
+  if(!pendingItem)return;
+  doAddToCart(pendingItem.id,pendingSize,selectedExtras.slice());
+  closeIngModal();
+}
+function doAddToCart(id,sz,extraIdxs){
+  const it=M.find(i=>i.id===id);if(!it||!it.on)return;
+  let price=it.p[sz];if(!price)return;
+  const label=SZ_LABELS[sz]||sz;
+  // Calculate extras cost
+  const extras=CAT_EXTRAS[it.cat]||[];
+  let extraNames=[];
+  extraIdxs.forEach(i=>{if(extras[i]){price+=extras[i].pr;extraNames.push(extras[i].name)}});
+  const extraStr=extraNames.length?` + ${extraNames.join(', ')}`:'';
+  const existing=cart.find(c=>c.id===id&&c.sz===sz&&c.extraStr===extraStr);
+  if(existing){existing.q++}else{cart.push({id,name:it.n,sz,szL:label,pr:price,q:1,extraStr})}
+  updCart();showToast(`✅ ${it.n}${label?' ('+label+')':''}${extraStr} agregado`);
+}
+function chgQ(i,d){cart[i].q+=d;if(cart[i].q<=0)cart.splice(i,1);updCart();renderCI()}
+function clearCart(){cart=[];updCart();renderCI();closeCart();showToast('🗑️ Carrito vaciado')}
+function updCart(){
+  const n=cart.reduce((s,c)=>s+c.q,0),t=cart.reduce((s,c)=>s+c.pr*c.q,0);
+  document.getElementById('cbarN').textContent=n;document.getElementById('cbarT').textContent=fmt(t);
+  document.getElementById('csTotal').textContent=fmt(t);document.getElementById('cbar').classList.toggle('vis',n>0);
+  document.getElementById('btnOrd').disabled=n===0;
+  const hdrBtn=document.getElementById('hdrCartBtn'),hdrCount=document.getElementById('hdrCartCount');
+  hdrBtn.classList.toggle('has-items',n>0);hdrCount.classList.toggle('vis',n>0);hdrCount.textContent=n;
+  const fab=document.getElementById('chatFab');if(fab)fab.classList.toggle('has-cart',n>0);
+}
+function openCart(){if(!cart.length)return;renderCI();document.getElementById('csOv').classList.add('open');document.getElementById('csheet').classList.add('open')}
+function closeCart(){document.getElementById('csOv').classList.remove('open');document.getElementById('csheet').classList.remove('open')}
+function renderCI(){
+  document.getElementById('csItems').innerHTML=cart.map((c,i)=>`<div class="ci"><div class="ci-info"><div class="ci-name">${c.name}</div><div class="ci-size">${c.szL}${c.extraStr?'<br><span style="font-size:.65rem;color:var(--gold)">'+c.extraStr+'</span>':''}</div></div><div class="ci-qty"><button class="qbtn" onclick="chgQ(${i},-1)">−</button><span class="qnum">${c.q}</span><button class="qbtn" onclick="chgQ(${i},1)">+</button></div><div class="ci-price">${fmt(c.pr*c.q)}</div></div>`).join('');
+}
+
+// ═══ ORDER ═══
+function sendOrder(){
+  if(!cart.length)return;
+  const ord={id:'ORD-'+Date.now(),items:cart.map(c=>({...c})),total:cart.reduce((s,c)=>s+c.pr*c.q,0),ts:new Date().toISOString(),status:'pendiente'};
+  orders.push(ord);sesTotal+=ord.total;
+  send({type:'new_order',orderId:ord.id,items:ord.items,total:ord.total,sesTotal,orders});
+  closeCart();renderSentSum(ord);showSc('scSent');cart=[];updCart();showToast('🔔 ¡Pedido enviado!');
+}
+function renderSentSum(o){
+  let h=o.items.map(c=>`<div class="sc-row"><span>${c.q}x ${c.name}${c.szL?' ('+c.szL+')':''}${c.extraStr||''}</span><span>${fmt(c.pr*c.q)}</span></div>`).join('');
+  h+=`<div class="sc-total-row"><span>Este pedido</span><span>${fmt(o.total)}</span></div>`;
+  if(orders.length>1)h+=`<div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:.82rem;color:var(--text-sec)"><span>Acumulado (${orders.length} pedidos)</span><span style="color:var(--gold);font-family:var(--heading);font-weight:700">${fmt(sesTotal)}</span></div>`;
+  document.getElementById('sentSum').innerHTML=h;document.getElementById('statusTxt').textContent='Esperando confirmación...';renderOhist();
+}
+function renderOhist(){
+  if(orders.length<=1){document.getElementById('ohist').innerHTML='';return}
+  let h='<h3>Pedidos anteriores</h3>';
+  orders.slice().reverse().forEach(o=>{const it=o.items.map(c=>`${c.q}x ${c.name}`).join(', ');h+=`<div class="oh-item"><span class="oh-badge ${o.status}">${o.status}</span><span class="oh-total">${fmt(o.total)}</span><div style="font-size:.72rem;color:var(--text-sec);margin-top:6px">${it}</div></div>`});
+  document.getElementById('ohist').innerHTML=h;
+}
+function updOrd(id,st){const o=orders.find(x=>x.id===id);if(o)o.status=st;renderOhist()}
+
+// ═══ BILL ═══
+function requestBill(){renderBillSum();showSc('scWait');send({type:'payment_requested',sesTotal,orders});showToast('💳 Cuenta solicitada')}
+function renderBillSum(){let h='';orders.forEach(o=>o.items.forEach(c=>{h+=`<div class="sc-row"><span>${c.q}x ${c.name}${c.szL?' ('+c.szL+')':''}</span><span>${fmt(c.pr*c.q)}</span></div>`}));h+=`<div class="sc-total-row"><span>TOTAL</span><span>${fmt(sesTotal)}</span></div>`;document.getElementById('billSum').innerHTML=h}
+function renderRcpt(){let h='';orders.forEach(o=>o.items.forEach(c=>{h+=`<div class="sc-row"><span>${c.q}x ${c.name}${c.szL?' ('+c.szL+')':''}</span><span>${fmt(c.pr*c.q)}</span></div>`}));const ml={efectivo:'💵 Efectivo',debito:'💳 Débito',credito:'💳 Crédito',qr:'📱 QR MP',transferencia:'🏦 Transferencia'};h+=`<div class="sc-total-row"><span>TOTAL</span><span>${fmt(sesTotal)}</span></div>`;h+=`<div style="text-align:center;margin-top:12px;font-size:.82rem;color:var(--text-sec)">Método: ${ml[payMeth]||payMeth}</div>`;document.getElementById('rcptSum').innerHTML=h}
+
+// ═══ PDF RECEIPT ═══
+function downloadReceipt(){
+  const now=new Date(),ds=now.toLocaleDateString('es-AR'),ts=now.toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit'});
+  const items=[];orders.forEach(o=>o.items.forEach(c=>items.push([`${c.q}x ${c.name}`,c.szL||'-',fmt(c.pr*c.q)])));
+  const ml={efectivo:'Efectivo',debito:'Débito',credito:'Crédito',qr:'QR Mercado Pago',transferencia:'Transferencia'};
+  const dd={pageSize:{width:226.77,height:'auto'},pageMargins:[12,12,12,12],content:[
+    {text:BIZ.name.toUpperCase(),fontSize:14,bold:true,alignment:'center',margin:[0,0,0,2]},{text:BIZ.tag,fontSize:8,alignment:'center',color:'#888',margin:[0,0,0,2]},{text:BIZ.addr,fontSize:7,alignment:'center',color:'#888'},{text:'CUIT: '+BIZ.cuit,fontSize:7,alignment:'center',color:'#888',margin:[0,0,0,4]},
+    {canvas:[{type:'line',x1:0,y1:0,x2:200,y2:0,lineWidth:.5,lineColor:'#888'}],margin:[0,4,0,4]},{text:'COMPROBANTE DE CONSUMO',fontSize:9,bold:true,alignment:'center',margin:[0,0,0,2]},{text:'Documento no válido como factura',fontSize:6,italics:true,alignment:'center',color:'#999',margin:[0,0,0,4]},
+    {canvas:[{type:'line',x1:0,y1:0,x2:200,y2:0,lineWidth:.5,lineColor:'#888'}],margin:[0,2,0,4]},{columns:[{text:'Fecha: '+ds,fontSize:7},{text:'Hora: '+ts,fontSize:7,alignment:'right'}]},{text:'Mesa: '+mesa,fontSize:7,margin:[0,2,0,4]},
+    {canvas:[{type:'line',x1:0,y1:0,x2:200,y2:0,lineWidth:.5,lineColor:'#888'}],margin:[0,2,0,4]},{table:{widths:['*',40,55],body:[[{text:'Item',fontSize:7,bold:true},{text:'Tam.',fontSize:7,bold:true},{text:'Subt.',fontSize:7,bold:true,alignment:'right'}],...items.map(r=>[{text:r[0],fontSize:7},{text:r[1],fontSize:7},{text:r[2],fontSize:7,alignment:'right'}])]},layout:{hLineWidth:()=>.3,vLineWidth:()=>0,hLineColor:()=>'#DDD',paddingTop:()=>3,paddingBottom:()=>3}},
+    {canvas:[{type:'line',x1:0,y1:0,x2:200,y2:0,lineWidth:1,lineColor:'#333'}],margin:[0,6,0,4]},{columns:[{text:'TOTAL',fontSize:12,bold:true},{text:fmt(sesTotal),fontSize:12,bold:true,alignment:'right'}]},{text:'Pago: '+(ml[payMeth]||payMeth),fontSize:7,color:'#888',margin:[0,4,0,0]},
+    {canvas:[{type:'line',x1:0,y1:0,x2:200,y2:0,lineWidth:.5,lineColor:'#888'}],margin:[0,8,0,6]},{text:'¡Gracias por tu visita!',fontSize:9,bold:true,alignment:'center',margin:[0,0,0,2]},{text:'Dejanos tu opinión en Google Maps ⭐',fontSize:7,alignment:'center',color:'#888',margin:[0,0,0,4]},{text:'Nro: '+Date.now().toString(36).toUpperCase(),fontSize:6,alignment:'center',color:'#999'}
+  ]};
+  pdfMake.createPdf(dd).download('comprobante-lafarola-mesa'+mesa+'.pdf');showToast('📄 Comprobante descargado');
+}
+
+// ═══ UTILS ═══
+function setRating(n){userRating=n;document.querySelectorAll('.rating-stars button').forEach((b,i)=>b.classList.toggle('active',i<n))}
+function goReviews(){if(PLACE_ID==='TU_GOOGLE_PLACE_ID')window.open('https://www.google.com/maps/search/La+Farola+Express+Banfield','_blank');else window.open(REVIEW_URL,'_blank');setTimeout(()=>resetAll(),2000)}
+function showSc(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));if(id)document.getElementById(id).classList.add('on')}
+function backToMenu(){showSc(null)}
+function resetAll(){cart=[];orders=[];sesTotal=0;payMeth=null;userRating=0;updCart();showSc(null);scrollTo({top:0,behavior:'smooth'})}
+function confetti(){const c=document.getElementById('confC'),cols=['#D4AF37','#FFD700','#EF4444','#22C55E','#3B82F6','#F59E0B','#8B5CF6'];for(let i=0;i<60;i++){const d=document.createElement('div');d.className='confetti';d.style.left=Math.random()*100+'%';d.style.background=cols[Math.floor(Math.random()*cols.length)];d.style.width=(Math.random()*8+5)+'px';d.style.height=d.style.width;d.style.borderRadius=Math.random()>.5?'50%':'2px';d.style.animationDuration=(Math.random()*2+2)+'s';d.style.animationDelay=(Math.random()*1.5)+'s';c.appendChild(d)}setTimeout(()=>c.innerHTML='',5000)}
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2800)}
+
+// ═══ AI CHAT ═══
+let chatHistory=[],chatOpen=false,chatInitialized=false;
+setTimeout(()=>{const label=document.getElementById('chatLabel');if(label&&!chatOpen){label.classList.add('show');setTimeout(()=>label.classList.remove('show'),4000)}},5000);
+function toggleChat(){chatOpen?closeChat():openChatPanel()}
+function openChatPanel(){chatOpen=true;document.getElementById('chatOv').classList.add('open');document.getElementById('chatPanel').classList.add('open');document.getElementById('chatFab').style.display='none';if(!chatInitialized){chatInitialized=true;addBotMsg('¡Hola! 👋 Soy el asistente de <b>La Farola Express</b>. Tenemos más de 120 platos increíbles. ¿Qué tenés ganas de comer hoy? 🍽️')}setTimeout(()=>document.getElementById('chatInput').focus(),400)}
+function closeChat(){chatOpen=false;document.getElementById('chatOv').classList.remove('open');document.getElementById('chatPanel').classList.remove('open');document.getElementById('chatFab').style.display='flex'}
+document.addEventListener('DOMContentLoaded',()=>{
+  /* Chat close button */
+  const cb=document.getElementById('chatCloseBtn');
+  if(cb){cb.addEventListener('touchend',function(e){e.preventDefault();e.stopPropagation();closeChat()},{passive:false});cb.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();closeChat()})}
+  /* Chat FAB - ensure it works on mobile */
+  const fab=document.getElementById('chatFab');
+  if(fab){
+    fab.addEventListener('touchend',function(e){e.preventDefault();e.stopPropagation();toggleChat()},{passive:false});
+    fab.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();toggleChat()});
+    /* Ensure FAB is visible and clickable */
+    fab.style.pointerEvents='auto';
+    fab.style.zIndex='600';
+  }
+});
+function addBotMsg(html){const row=document.createElement('div');row.className='chat-msg-row';row.innerHTML='<div class="chat-bot-avatar">🍽️</div>';const d=document.createElement('div');d.className='chat-msg bot';d.innerHTML=html;row.appendChild(d);document.getElementById('chatMsgs').appendChild(row);scrollChatBottom()}
+function addUserMsg(text){const d=document.createElement('div');d.className='chat-msg user';d.textContent=text;document.getElementById('chatMsgs').appendChild(d);scrollChatBottom()}
+function showTyping(){const d=document.createElement('div');d.className='chat-typing';d.id='chatTyping';d.innerHTML='<span></span><span></span><span></span>';document.getElementById('chatMsgs').appendChild(d);scrollChatBottom()}
+function hideTyping(){const t=document.getElementById('chatTyping');if(t)t.remove()}
+function scrollChatBottom(){const msgs=document.getElementById('chatMsgs');setTimeout(()=>msgs.scrollTop=msgs.scrollHeight,50)}
+function chatSendInput(){const input=document.getElementById('chatInput');const text=input.value.trim();if(!text)return;input.value='';chatSend(text)}
+
+/* ═══ ASISTENTE IA LOCAL — LA FAROLA EXPRESS ═══ */
+function getAIResponse(text){
+  const t=text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  /* Helper: buscar items del menú que coincidan */
+  function findItems(query){
+    const q=query.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+    return M.filter(i=>i.on!==false&&(i.n.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').includes(q)||i.cat.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').includes(q)||(i.desc||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').includes(q)));
+  }
+  function fmtP(p){
+    const labels={s:'',i:'Ind',m:'Med',g:'Gde',b:'Burger',ml:'Mila',lo:'Lomito',c:'Chica'};
+    return Object.entries(p).map(([k,v])=>`${labels[k]?labels[k]+' ':''}$${v.toLocaleString('es-AR')}`).join(' · ');
+  }
+  function itemCard(it){return `<b>${it.n}</b> — ${fmtP(it.p)}${it.desc?' <i style="opacity:.7">('+it.desc+')</i>':''}`}
+  const SZ_SHORT={s:'',i:'Ind',m:'Med',g:'Gde',b:'Burger',ml:'Mila',lo:'Lomito',c:'Chica'};
+  function productCard(it){
+    const imgUrl=it.img||'https://loremflickr.com/200/200/food,restaurant';
+    const nutri=getNutri(it);
+    const sizes=Object.entries(it.p);
+    let btns='';
+    if(sizes.length===1){
+      const [sz,pr]=sizes[0];
+      btns=`<button class="cpc-add" onclick="addToCart('${it.id}','${sz}')">🛒 $${pr.toLocaleString('es-AR')}</button>`;
+    }else{
+      btns=sizes.map(([sz,pr])=>{
+        const label=SZ_SHORT[sz]||sz;
+        return `<button class="cpc-add" onclick="addToCart('${it.id}','${sz}')"><span class="cpc-sz">${label}</span> $${pr.toLocaleString('es-AR')}</button>`;
+      }).join('');
+    }
+    const descHtml=`<div class="cpc-desc">📋 ${nutri.ing}<br>🔥 ${nutri.cal} kcal</div>`;
+    return `<div class="chat-product-card"><img src="${imgUrl}" alt="${it.n}" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 72 72%22><rect fill=%22%23222%22 width=%2272%22 height=%2272%22 rx=%2210%22/><text x=%2236%22 y=%2240%22 text-anchor=%22middle%22 fill=%22%23C9A96E%22 font-size=%2224%22>🍽</text></svg>'"/><div class="cpc-info"><div class="cpc-name">${it.n}</div>${descHtml}<div class="cpc-prices">${btns}</div></div></div>`;
+  }
+
+  /* ═══ CATEGORÍAS ═══ */
+  const catKeywords={
+    milanesa:['milanesa','mila','napo','napolitana','fugazzeta','suiza','calabresa'],
+    pizzanesa:['pizzanesa'],
+    pizza:['pizza','fugazza','faina','muzza','muzzarella'],
+    sandwich:['sandwich','hamburguesa','burger','lomito','lomi'],
+    ensalada:['ensalada','cesar','capresse','verde','light'],
+    pasta:['pasta','tagliatelle','noqui','ñoqui','raviole','sorrentino','carbonara','bolognesa','ravio'],
+    pollo:['pollo','valenciana','wok'],
+    carne:['carne','lomo','matambre','asado','bife','vacio','entraña','vacío'],
+    cerdo:['cerdo','bondiola','costilla'],
+    pescado:['pescado','rabas','salmon','salmón','merluza','calamar','mariscos'],
+    cafeteria:['cafe','café','capuchino','submarino','chocolate','te','té','medialunas','tostado'],
+    postre:['postre','flan','brownie','cheesecake','tiramisu','tiramisú','helado','dulce'],
+    patisserie:['torta','selva negra','chocotorta','black mamba','lemon','marquise'],
+    bebida:['bebida','cerveza','fernet','vino','gaseosa','jugo','agua','copa','chopp','jarra'],
+    picoteo:['picoteo','picada','entrada','compartir','tabla','bastoncito','papas cervecera','sextolet'],
+    brunch:['brunch','desayuno','merienda'],
+    vegetariano:['vegetariano','vegano','vegetal','verdura'],
+    celiacos:['tacc','celiaco','celíaco','sin gluten','gluten'],
+    infantil:['niño','niños','infantil','chico','chicos','kids']
+  };
+
+  /* ═══ INTENT DETECTION ═══ */
+
+  /* Saludo */
+  if(/^(hola|buenas|hey|ey|buen dia|buenos dias|buenas tardes|buenas noches|que tal|hi|hello)/i.test(t)){
+    return '¡Hola! 😊 Bienvenido a <b>La Farola Express</b>. ¿En qué te puedo ayudar? Puedo recomendarte platos, contarte las promos, o ayudarte a elegir. ¡Preguntame lo que quieras!';
+  }
+
+  /* Plato del día / destacado */
+  if(t.includes('plato del dia')||t.includes('destacado')||t.includes('especial del dia')||t.includes('recomendacion del dia')){
+    const ids=['mil-nap','piz-far','car-mat','pat-ti'];
+    const dest=ids.map(id=>M.find(i=>i.id===id)).filter(Boolean);
+    return '🔥 <b>Destacados de hoy:</b><br>'+dest.map(i=>productCard(i)).join('')+'<br>¿Te tienta alguno? 😋';
+  }
+
+  /* Recomendación general */
+  if(t.includes('recomen')||t.includes('que me')||t.includes('que pido')||t.includes('sugerencia')||t.includes('sugeri')||t.includes('mejor plato')){
+    const ids=['mil-nap','pic-pod','pas-car','pos-bro'];
+    const recs=ids.map(id=>M.find(i=>i.id===id)).filter(Boolean);
+    return '⭐ <b>Mis top recomendaciones:</b><br>'+recs.map(i=>productCard(i)).join('')+'<br>¿Querés que te cuente más de alguno? 😊';
+  }
+
+  /* Promos */
+  if(t.includes('promo')||t.includes('oferta')||t.includes('descuento')||t.includes('combo')||t.includes('2x1')||t.includes('barato')||t.includes('economico')){
+    const ids=['pic-pap','pic-bast','pic-sex','pic-pod'];
+    const promos=ids.map(id=>M.find(i=>i.id===id)).filter(Boolean);
+    return '🔥 <b>Promos actuales — ideales para compartir:</b><br>'+promos.map(i=>productCard(i)).join('')+'<br>¡Todas incluyen bebida! 🍻';
+  }
+
+  /* Sin TACC / Celíacos */
+  if(t.includes('tacc')||t.includes('celiaco')||t.includes('celiac')||t.includes('gluten')){
+    const items=findItems('Sin TACC');
+    if(items.length>0){
+      return '🌾 <b>Opciones Sin TACC:</b><br>'+items.map(i=>productCard(i)).join('')+'<br>También podés pedir <b>ensaladas</b> y <b>carnes a la plancha</b> que son naturalmente sin gluten. ¡Consultá con el mozo para más opciones! 💚';
+    }
+    return '🌾 Tenemos opciones <b>Sin TACC</b> en pastas (ravioles y sorrentinos), además de ensaladas y carnes a la plancha. ¡Consultá con el mozo para confirmar! 💚';
+  }
+
+  /* Vegetariano */
+  if(t.includes('vegetarian')||t.includes('vegano')||t.includes('vegetal')||t.includes('sin carne')){
+    const items=findItems('Vegetariano').concat(findItems('Ensaladas'));
+    const unique=[...new Map(items.map(i=>[i.id,i])).values()].slice(0,6);
+    if(unique.length>0){
+      return '🥬 <b>Opciones Vegetarianas:</b><br>'+unique.map(i=>productCard(i)).join('')+'<br>También pizzas de muzzarella, fugazza y muchas pastas. ¡Hay mucho para elegir! 🌿';
+    }
+    return '🥬 Tenemos varias opciones vegetarianas: <b>ensaladas</b> (César, Capresse, Mixta), <b>pizzas</b> (Muzzarella, Fugazza), <b>pastas</b> con salsas sin carne, y platos de la sección Vegetariano. 🌿';
+  }
+
+  /* Para niños */
+  if(t.includes('nino')||t.includes('niño')||t.includes('chico')||t.includes('kids')||t.includes('infantil')||t.includes('hijo')){
+    const ids=['sw-cla','mil-sim','piz-muz','pos-fla','caf-sub'];
+    const kids=ids.map(id=>M.find(i=>i.id===id)).filter(Boolean);
+    return '👶 <b>Para los más chicos:</b><br>'+kids.map(i=>productCard(i)).join('')+'<br>¡Los nenes la pasan genial acá! 😊';
+  }
+
+  /* Compartir */
+  if(t.includes('compartir')||t.includes('grupo')||t.includes('varios')||t.includes('mesa grande')||t.includes('para dos')||t.includes('pareja')){
+    const ids=['pic-pod','pic-sex','pic-pap','piz-muz','mil-sim'];
+    const share=ids.map(id=>M.find(i=>i.id===id)).filter(Boolean);
+    return '🍽️ <b>Ideales para compartir:</b><br>'+share.map(i=>productCard(i)).join('')+'<br>¿Para cuántas personas serían? Así te armo la mejor selección 😉';
+  }
+
+  /* Precios generales */
+  if(t.includes('precio')||t.includes('cuanto sale')||t.includes('cuanto cuesta')||t.includes('valor')){
+    /* Try to find specific item mentioned */
+    const words=t.replace(/precio|cuanto|sale|cuesta|valor|de|la|el|los|las|un|una/g,'').trim();
+    if(words.length>2){
+      const found=findItems(words);
+      if(found.length>0){
+        return '💰 <b>Precios:</b><br>'+found.slice(0,5).map(i=>productCard(i)).join('')+'<br>¿Querés agregar algo al pedido? 🛒';
+      }
+    }
+    return '💰 <b>Rangos de precios:</b><br><br>🍕 Pizzas: desde <b>$11.000</b> (ind) · $22.000 (gde)<br>🍗 Milanesas: desde <b>$19.000</b> (ind) · $62.000 (gde)<br>🍔 Sándwiches: desde <b>$14.000</b><br>🍝 Pastas: desde <b>$17.000</b><br>🥩 Carnes: desde <b>$28.000</b><br>☕ Cafetería: desde <b>$3.000</b><br>🍮 Postres: desde <b>$4.950</b><br><br>¿Querés saber el precio de algo específico? Preguntame 😊';
+  }
+
+  /* Horarios */
+  if(t.includes('horario')||t.includes('hora')||t.includes('abren')||t.includes('cierran')||t.includes('atienden')||t.includes('abierto')){
+    return '🕐 <b>Horarios:</b><br><br>📅 <b>Lunes a Domingo</b><br>⏰ <b>10:00 — 01:00</b><br><br>¡Te esperamos todos los días! 😊';
+  }
+
+  /* Ubicación */
+  if(t.includes('donde')||t.includes('direccion')||t.includes('ubicacion')||t.includes('como llego')||t.includes('llegar')){
+    return '📍 <b>Ubicación:</b><br><br>🏠 <b>Banfield, Buenos Aires</b><br>📍 Argentina<br><br>🚗 Fácil acceso y estacionamiento cercano<br>🚇 Cerca de la estación Banfield<br><br>¡Te esperamos! 🍽️';
+  }
+
+  /* Delivery / Llevar */
+  if(t.includes('delivery')||t.includes('envio')||t.includes('envío')||t.includes('llevar')||t.includes('take away')||t.includes('para llevar')||t.includes('pedidos ya')||t.includes('rappi')){
+    return '🛵 <b>¡Sí hacemos para llevar!</b><br><br>📞 Llamanos o escribinos por <b>WhatsApp</b> para hacer tu pedido<br>📱 Tocá el botón verde de WhatsApp abajo a la derecha<br><br>📋 Podés ver todo el menú acá y decirnos qué querés. ¡Preparamos tu pedido al toque! 🔥';
+  }
+
+  /* Reservas */
+  if(t.includes('reserva')||t.includes('mesa')||t.includes('reservar')){
+    return '🪑 <b>Reservas:</b><br><br>📱 Contactanos por <b>WhatsApp</b> para reservar tu mesa<br>💬 Tocá el botón verde abajo a la derecha<br>📞 O llamanos directamente<br><br>¡Te guardamos la mejor mesa! 😊';
+  }
+
+  /* Pago */
+  if(t.includes('pago')||t.includes('pagar')||t.includes('efectivo')||t.includes('tarjeta')||t.includes('debito')||t.includes('credito')||t.includes('mercado pago')||t.includes('qr')){
+    return '💳 <b>Métodos de pago:</b><br><br>💵 <b>Efectivo</b><br>💳 <b>Tarjeta de débito</b><br>💳 <b>Tarjeta de crédito</b><br>📱 <b>QR Mercado Pago</b><br><br>¡Aceptamos todos los medios! 😊';
+  }
+
+  /* Bebidas */
+  if(t.includes('bebida')||t.includes('tomar')||t.includes('cerveza')||t.includes('vino')||t.includes('fernet')||t.includes('trago')){
+    const items=findItems('Bebidas').filter(i=>i.on!==false);
+    if(items.length>0){
+      return '🍻 <b>Bebidas:</b><br>'+items.map(i=>productCard(i)).join('')+'<br>¡Salud! 🥂';
+    }
+  }
+
+  /* Postre */
+  if(t.includes('postre')||t.includes('dulce')||t.includes('algo rico')||t.includes('torta')){
+    const items=[...findItems('Postres'),...findItems('Patisserie')].filter(i=>i.on!==false);
+    const unique=[...new Map(items.map(i=>[i.id,i])).values()].slice(0,8);
+    if(unique.length>0){
+      return '🍮 <b>Postres y Patisserie:</b><br>'+unique.map(i=>productCard(i)).join('')+'<br>¡El broche de oro! ✨';
+    }
+  }
+
+  /* Search by category keyword */
+  for(const[cat,keywords] of Object.entries(catKeywords)){
+    if(keywords.some(k=>t.includes(k))){
+      const catName=Object.keys(catKeywords).find(c=>c===cat);
+      const catMap={milanesa:'Milanesas',pizzanesa:'Pizzanesa',pizza:'Pizzas',sandwich:'Sandwiches',ensalada:'Ensaladas',pasta:'Pastas',pollo:'Pollo',carne:'Carnes',cerdo:'Cerdo',pescado:'Pescados',cafeteria:'Cafetería',postre:'Postres',patisserie:'Patisserie',bebida:'Bebidas',picoteo:'Picoteo',brunch:'Brunch',vegetariano:'Vegetariano',celiacos:'Celíacos',infantil:'Infantil'};
+      const realCat=catMap[cat];
+      const items=M.filter(i=>i.on!==false&&i.cat===realCat);
+      if(items.length>0){
+        const emoji={Milanesas:'🍗',Pizzanesa:'🔥',Pizzas:'🍕',Sandwiches:'🍔',Ensaladas:'🥗',Pastas:'🍝',Pollo:'🐔',Carnes:'🥩',Cerdo:'🐷',Pescados:'🐟',Cafetería:'☕',Postres:'🍮',Patisserie:'🎂',Bebidas:'🥤',Picoteo:'🍢',Brunch:'☕',Vegetariano:'🥬',Celíacos:'🌾',Infantil:'👶'}[realCat]||'🍽️';
+        return `${emoji} <b>${realCat}:</b><br>`+items.slice(0,8).map(i=>productCard(i)).join('')+(items.length>8?`<br><i>...y ${items.length-8} opciones más. ¡Scrolleá la categoría en el menú!</i>`:'')+`<br>¿Te tienta algo? 😋`;
+      }
+    }
+  }
+
+  /* Generic search - try to find any item matching the text */
+  const searchTerms=t.replace(/quiero|tengo|ganas|de|tenes|tienen|hay|dame|me|das|un|una|el|la|los|las|por|favor|que|como|es|son/g,'').trim();
+  if(searchTerms.length>2){
+    const found=findItems(searchTerms);
+    if(found.length>0){
+      return '🔍 <b>Encontré esto:</b><br>'+found.slice(0,6).map(i=>productCard(i)).join('')+'<br>¿Querés agregar algo al pedido? 🛒';
+    }
+  }
+
+  /* Agradecimiento */
+  if(t.includes('gracia')||t.includes('genial')||t.includes('perfecto')||t.includes('gracias')||t.includes('excelente')){
+    return '¡De nada! 😊 Cualquier otra duda, acá estoy. ¡Que disfrutes tu comida en <b>La Farola Express</b>! 🍽️✨';
+  }
+
+  /* Despedida */
+  if(t.includes('chau')||t.includes('adios')||t.includes('nos vemos')||t.includes('hasta luego')){
+    return '¡Hasta pronto! 👋 ¡Te esperamos en <b>La Farola Express</b>! 🍽️😊';
+  }
+
+  /* Fallback inteligente */
+  const fallbacks=[
+    '🤔 No estoy 100% seguro de qué buscás, pero te cuento lo que puedo ayudarte:<br><br>🍽️ <b>Recomendaciones</b> — Preguntame "¿qué me recomendás?"<br>🔥 <b>Promos</b> — Decime "promos" y te cuento<br>📋 <b>Categorías</b> — Milanesas, pizzas, pastas, carnes, postres...<br>💰 <b>Precios</b> — "¿cuánto sale la milanesa?"<br>🕐 <b>Info</b> — Horarios, ubicación, medios de pago<br><br>¡Preguntame lo que quieras! 😊',
+    '🍽️ No encontré eso exacto, pero tenemos <b>más de 120 platos</b> increíbles. Probá preguntar por:<br><br>• Una categoría: "milanesas", "pizzas", "pastas"<br>• Una recomendación: "¿qué me recomendás?"<br>• Algo específico: "¿tienen rabas?"<br>• Promos: "¿cuáles son las promos?"<br><br>¡Seguro encontramos algo que te encante! 😋'
+  ];
+  return fallbacks[Math.floor(Math.random()*fallbacks.length)];
+}
+
+async function chatSend(text){
+  addUserMsg(text);chatHistory.push({role:'user',content:text});showTyping();document.getElementById('chatChips').style.display='none';
+  /* Simular delay de respuesta natural */
+  const delay=400+Math.random()*800;
+  setTimeout(()=>{
+    hideTyping();
+    const reply=getAIResponse(text);
+    chatHistory.push({role:'assistant',content:reply});
+    addBotMsg(reply);
+  },delay);
+}
+</script>
+<!-- Ingredient Customization Modal -->
+<div class="ing-modal-ov" id="ingOv" onclick="if(event.target===this)closeIngModal()">
+<div class="ing-modal">
+  <div class="ing-modal-hdr" id="ingHdr"></div>
+  <div class="ing-modal-body" id="ingBody"></div>
+  <div class="ing-footer">
+    <button class="ing-btn-cancel" onclick="closeIngModal()">✕ Cancelar</button>
+    <button class="ing-btn-add" id="ingConfirm" onclick="confirmAddToCart()">🛒 Agregar</button>
+  </div>
+</div>
+</div>
+</body>
+</html>

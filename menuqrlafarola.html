@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>La Farola Express — Menú</title>
+<meta name="theme-color" content="#0B0E14">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{--dk:#0B0E14;--s1:#111827;--s2:#1A2236;--s3:#243049;--gold:#D4A843;--t1:#F8FAFC;--t2:#94A3B8;--t3:#64748B;--r:14px}
+body{font-family:'Inter',sans-serif;background:var(--dk);color:var(--t1);min-height:100vh;-webkit-font-smoothing:antialiased}
+
+.hero{padding:44px 20px 28px;text-align:center;background:linear-gradient(160deg,#0B0E14,#111A2E 50%,#1A1510)}
+.hero-logo{font-size:3rem;margin-bottom:8px}
+.hero h1{font-size:1.8rem;font-weight:900;letter-spacing:-.03em}
+.hero h1 span{color:var(--gold)}
+.hero-sub{font-size:.82rem;color:var(--t2);margin-top:4px}
+.hero-open{display:inline-flex;align-items:center;gap:6px;margin-top:14px;padding:5px 14px;border-radius:20px;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2);font-size:.72rem;font-weight:600;color:#22C55E}
+.hero-open::before{content:'';width:7px;height:7px;border-radius:50%;background:#22C55E;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+.cat-nav{position:sticky;top:0;z-index:50;background:var(--dk);border-bottom:1px solid var(--s3);overflow-x:auto;display:flex;padding:10px 16px;gap:8px;-webkit-overflow-scrolling:touch}
+.cat-nav::-webkit-scrollbar{display:none}
+.cat-btn{white-space:nowrap;padding:7px 14px;border-radius:20px;background:var(--s2);border:1px solid var(--s3);color:var(--t2);font-size:.76rem;font-weight:600;flex-shrink:0;transition:all .2s}
+.cat-btn.on{background:rgba(212,168,67,.12);border-color:var(--gold);color:var(--gold)}
+.cat-btn:active{transform:scale(.95)}
+
+.section{padding:18px 16px 6px}
+.sec-head{display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--s2)}
+.sec-emoji{font-size:1.5rem}
+.sec-title{font-size:1.1rem;font-weight:800}
+.sec-count{margin-left:auto;font-size:.7rem;color:var(--t3);background:var(--s2);padding:2px 8px;border-radius:10px}
+
+.item{background:var(--s1);border:1px solid var(--s2);border-radius:var(--r);padding:14px;margin-bottom:10px;display:flex;gap:12px;align-items:flex-start}
+.item-ico{font-size:1.8rem;width:42px;height:42px;display:flex;align-items:center;justify-content:center;background:var(--s2);border-radius:11px;flex-shrink:0}
+.item-body{flex:1;min-width:0}
+.item-name{font-weight:700;font-size:.9rem;margin-bottom:2px}
+.item-desc{font-size:.74rem;color:var(--t3);line-height:1.4;margin-bottom:7px}
+.item-prices{display:flex;flex-wrap:wrap;gap:6px}
+.price-tag{padding:4px 10px;border-radius:8px;font-size:.76rem;font-weight:700;background:rgba(212,168,67,.08);color:var(--gold);border:1px solid rgba(212,168,67,.12)}
+.price-tag .sz{font-weight:500;color:var(--t3);margin-right:3px;font-size:.66rem;text-transform:uppercase}
+
+.footer{padding:28px 20px;text-align:center;color:var(--t3);font-size:.7rem;line-height:1.6;border-top:1px solid var(--s2);margin-top:16px}
+.footer b{color:var(--gold)}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-logo">🍽️</div>
+  <h1>La <span>Farola</span> Express</h1>
+  <div class="hero-sub">Banfield · Menú Digital</div>
+  <div class="hero-open">Abierto ahora</div>
+</div>
+
+<div class="cat-nav" id="nav"></div>
+<div id="menuBox"></div>
+
+<div class="footer">
+  La Farola Express — Banfield, Buenos Aires<br>
+  Precios vigentes al día de la fecha<br>
+  ⚡ Powered by <b>PIGI</b> · NFC TAP Menu
+</div>
+
+<script>
+const MENU=[
+{id:'pic-1',n:'Sextolet',cat:'Picoteo',desc:'6 gustos para compartir',e:'🍢',p:{s:26000},on:1},
+{id:'pic-2',n:'Tabla La Poderosa',cat:'Picoteo',desc:'Tabla premium para compartir',e:'🍢',p:{s:55000},on:1},
+{id:'pic-3',n:'Papas Cerveceras',cat:'Picoteo',desc:'Con cheddar y panceta',e:'🍟',p:{s:17000},on:1},
+{id:'pic-4',n:'Bastoncitos Muzzarella',cat:'Picoteo',desc:'Crocantes con dip',e:'🧀',p:{s:15000},on:1},
+{id:'mil-1',n:'Milanesa Simple',cat:'Milanesas',desc:'Con guarnición a elección',e:'🥩',p:{i:19000,m:33000,g:62000},on:1},
+{id:'mil-2',n:'Milanesa Napolitana',cat:'Milanesas',desc:'Salsa, jamón y muzzarella',e:'🥩',p:{i:22000,m:38000,g:69000},on:1},
+{id:'mil-3',n:'Milanesa BBQ Premium',cat:'Milanesas',desc:'Salsa BBQ, cheddar, panceta',e:'🥩',p:{i:24000,m:42000,g:77000},on:1},
+{id:'mil-4',n:'Milanesa Cheddar Premium',cat:'Milanesas',desc:'Cheddar fundido y cebolla',e:'🥩',p:{i:24000,m:42000,g:77000},on:1},
+{id:'mil-5',n:'Milanesa Suiza',cat:'Milanesas',desc:'Jamón, queso, huevo',e:'🥩',p:{i:22000,m:38000,g:69000},on:1},
+{id:'mil-6',n:'Milanesa Completa',cat:'Milanesas',desc:'Jamón, queso, huevo, papas',e:'🥩',p:{i:22000,m:38000,g:69000},on:1},
+{id:'piz-1',n:'Pizza Muzzarella',cat:'Pizzas',desc:'Clásica con muzzarella',e:'🍕',p:{i:11000,g:22000},on:1},
+{id:'piz-2',n:'Pizza Napolitana',cat:'Pizzas',desc:'Tomate, ajo y albahaca',e:'🍕',p:{i:12000,g:24000},on:1},
+{id:'piz-3',n:'Pizza Fugazza c/ Queso',cat:'Pizzas',desc:'Cebolla y queso',e:'🍕',p:{i:12000,g:24000},on:1},
+{id:'piz-4',n:'Pizza Jamón',cat:'Pizzas',desc:'Jamón cocido y muzzarella',e:'🍕',p:{i:14000,g:28000},on:1},
+{id:'piz-5',n:'Pizza Crudo y Rúcula',cat:'Pizzas',desc:'Jamón crudo, rúcula, parmesano',e:'🍕',p:{i:16000,g:34000},on:1},
+{id:'piz-6',n:'Pizza Farola',cat:'Pizzas',desc:'Especialidad de la casa',e:'🍕',p:{i:16000,g:36000},on:1},
+{id:'piz-7',n:'Fainá',cat:'Pizzas',desc:'Acompañamiento clásico',e:'🫓',p:{s:2000},on:1},
+{id:'san-1',n:'Sándwich Clásico',cat:'Sandwiches',desc:'Lechuga, tomate y aderezos',e:'🍔',p:{b:14000,ml:15000,lo:16000},on:1},
+{id:'san-2',n:'Sándwich Full Full',cat:'Sandwiches',desc:'Completo con huevo, jamón y queso',e:'🍔',p:{b:17000,ml:18000,lo:19000},on:1},
+{id:'san-3',n:'Sándwich BBQ',cat:'Sandwiches',desc:'Salsa BBQ, cebolla crispy y cheddar',e:'🍔',p:{b:18000,ml:19000,lo:20000},on:1},
+{id:'san-4',n:'Sándwich Cheddar',cat:'Sandwiches',desc:'Cheddar fundido y panceta',e:'🍔',p:{b:19000,ml:20000,lo:22000},on:1},
+{id:'ens-1',n:'Ensalada Mixta',cat:'Ensaladas',desc:'Lechuga, tomate, cebolla',e:'🥗',p:{s:9000},on:1},
+{id:'ens-2',n:'Ensalada César',cat:'Ensaladas',desc:'Pollo, parmesano, croutons',e:'🥗',p:{s:18000},on:1},
+{id:'ens-3',n:'Ensalada Capresse',cat:'Ensaladas',desc:'Tomate, mozzarella, albahaca',e:'🥗',p:{s:18000},on:1},
+{id:'pas-1',n:'Tagliatelle',cat:'Pastas',desc:'Pasta fresca al huevo',e:'🍝',p:{c:17000,g:30000},on:1},
+{id:'pas-2',n:'Ñoquis',cat:'Pastas',desc:'De papa caseros',e:'🍝',p:{c:17000,g:30000},on:1},
+{id:'pas-3',n:'Ravioles',cat:'Pastas',desc:'Rellenos de ricota y nuez',e:'🍝',p:{c:18000,g:32000},on:1},
+{id:'pas-4',n:'Carbonara',cat:'Pastas',desc:'Panceta, parmesano, huevo',e:'🍝',p:{c:22000,g:40000},on:1},
+{id:'pol-1',n:'Arroz Valenciana',cat:'Pollo',desc:'Arroz con pollo y verduras',e:'🐔',p:{s:18000},on:1},
+{id:'pol-2',n:'Pollo Wok',cat:'Pollo',desc:'Salteado con vegetales',e:'🐔',p:{s:19000},on:1},
+{id:'pol-3',n:'1/4 Pollo con Fritas',cat:'Pollo',desc:'Clásico con papas',e:'🐔',p:{s:17000},on:1},
+{id:'car-1',n:'Matambre a la Pizza',cat:'Carnes',desc:'700g con guarnición',e:'🥩',p:{s:45000},on:1},
+{id:'car-2',n:'Lomo al Champiñón',cat:'Carnes',desc:'Bife de lomo con salsa',e:'🥩',p:{s:32000},on:1},
+{id:'car-3',n:'Asado Banderita',cat:'Carnes',desc:'Corte clásico argentino',e:'🥩',p:{s:28000},on:1},
+{id:'pes-1',n:'Rabas 600g',cat:'Pescados',desc:'Calamares fritos',e:'🦑',p:{s:30000},on:1},
+{id:'pes-2',n:'Salmón 400g',cat:'Pescados',desc:'Grillado con guarnición',e:'🐟',p:{s:32000},on:1},
+{id:'caf-1',n:'Café',cat:'Cafetería',desc:'Espresso',e:'☕',p:{s:3000},on:1},
+{id:'caf-2',n:'Café con Leche',cat:'Cafetería',desc:'Clásico',e:'☕',p:{s:4500},on:1},
+{id:'caf-3',n:'Capuchino',cat:'Cafetería',desc:'Con espuma',e:'☕',p:{s:5000},on:1},
+{id:'caf-4',n:'Submarino',cat:'Cafetería',desc:'Leche con chocolate',e:'🍫',p:{s:6000},on:1},
+{id:'pos-1',n:'Flan Casero',cat:'Postres',desc:'Con dulce de leche y crema',e:'🍮',p:{s:4950},on:1},
+{id:'pos-2',n:'Brownie con Helado',cat:'Postres',desc:'Chocolate intenso',e:'🍫',p:{s:10000},on:1},
+{id:'pos-3',n:'Cheesecake',cat:'Postres',desc:'New York style',e:'🍰',p:{s:11000},on:1},
+{id:'pos-4',n:'Tiramisú',cat:'Postres',desc:'Clásico italiano',e:'🍰',p:{s:11000},on:1},
+{id:'pat-1',n:'Black Mamba',cat:'Patisserie',desc:'Torta de chocolate premium',e:'🎂',p:{s:11000},on:1},
+{id:'pat-2',n:'Selva Negra',cat:'Patisserie',desc:'Chocolate, cerezas, crema',e:'🎂',p:{s:11000},on:1},
+{id:'pat-3',n:'Chocotorta',cat:'Patisserie',desc:'Clásica argentina',e:'🎂',p:{s:11000},on:1},
+{id:'beb-1',n:'Gaseosa',cat:'Bebidas',desc:'Línea Coca-Cola',e:'🥤',p:{s:3800},on:1},
+{id:'beb-2',n:'Cerveza Tirada 1L',cat:'Bebidas',desc:'Artesanal del día',e:'🍺',p:{s:8500},on:1},
+{id:'beb-3',n:'Fernet con Cola',cat:'Bebidas',desc:'El clásico argentino',e:'🥃',p:{s:7000},on:1},
+{id:'beb-4',n:'Vino Copa',cat:'Bebidas',desc:'Tinto o blanco',e:'🍷',p:{s:10000},on:1},
+{id:'beb-5',n:'Jugo Natural',cat:'Bebidas',desc:'Naranja exprimida',e:'🧃',p:{s:6500},on:1}
+];
+
+const SZ={s:'',i:'Ind',m:'Med',g:'Gde',c:'Chica',b:'Bondi',ml:'Mila',lo:'Lomo'};
+const fmt=n=>'$'+n.toLocaleString('es-AR');
+const active=MENU.filter(m=>m.on);
+const cats=[...new Set(active.map(m=>m.cat))];
+
+// Nav
+document.getElementById('nav').innerHTML=cats.map((c,i)=>`<button class="cat-btn${i===0?' on':''}" onclick="go('${c}',this)">${c}</button>`).join('');
+
+// Menu
+let h='';
+cats.forEach(cat=>{
+  const items=active.filter(m=>m.cat===cat);
+  const emojis={'Picoteo':'🍢','Milanesas':'🥩','Pizzas':'🍕','Sandwiches':'🍔','Ensaladas':'🥗','Pastas':'🍝','Pollo':'🐔','Carnes':'🥩','Pescados':'🐟','Cafetería':'☕','Postres':'🍮','Patisserie':'🎂','Bebidas':'🍺'};
+  h+=`<div class="section" id="s-${cat.replace(/\s/g,'-')}"><div class="sec-head"><span class="sec-emoji">${emojis[cat]||'🍽️'}</span><span class="sec-title">${cat}</span><span class="sec-count">${items.length}</span></div>`;
+  items.forEach(it=>{
+    const prices=Object.entries(it.p).map(([k,v])=>`<span class="price-tag">${SZ[k]?'<span class="sz">'+SZ[k]+'</span>':''}${fmt(v)}</span>`).join('');
+    h+=`<div class="item"><div class="item-ico">${it.e}</div><div class="item-body"><div class="item-name">${it.n}</div><div class="item-desc">${it.desc}</div><div class="item-prices">${prices}</div></div></div>`;
+  });
+  h+='</div>';
+});
+document.getElementById('menuBox').innerHTML=h;
+
+function go(cat,btn){
+  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  document.getElementById('s-'+cat.replace(/\s/g,'-'))?.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+// Sticky highlight
+const obs=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting){
+    const id=e.target.id.replace('s-','').replace(/-/g,' ');
+    document.querySelectorAll('.cat-btn').forEach(b=>b.classList.toggle('on',b.textContent===id));
+  }});
+},{threshold:.3,rootMargin:'-50px 0px -60% 0px'});
+document.querySelectorAll('.section').forEach(s=>obs.observe(s));
+</script>
+</body>
+</html>
